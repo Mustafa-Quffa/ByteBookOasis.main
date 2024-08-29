@@ -1,0 +1,35 @@
+.books-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.results {
+  margin-top: 20px;
+}

@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.hidden {
+    display: none; /* Or visibility: hidden; */
+  }
+  
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the container takes up the full viewport height */
+}
+
+main {
+    flex: 1; /* Allows the main content to grow and push the footer to the bottom */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-top: 4px solid #f9a825; /* Accent color for the top border */
+}

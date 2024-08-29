@@ -1,0 +1,145 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  padding: 20px;
+}
+
+/* Hero Section */
+.hero {
+  /* background: url('[hero-image-url]') no-repeat center center/cover; */
+  color: rgb(14, 1, 1);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero-content h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.hero-buttons .btn {
+  background-color: rgb(61, 35, 35);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.hero-buttons .btn:hover {
+  background-color: #4a2d2d;
+}
+
+/* Featured Books */
+.featured-books {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.book {
+  text-align: center;
+  margin: 10px;
+}
+
+.book img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.book-info h3 {
+  margin: 10px 0;
+}
+
+.book-info .btn {
+  background-color: rgb(61, 35, 35);
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.book-info .btn:hover {
+  background-color: #4a2d2d;
+}
+
+/* Library News */
+.library-news {
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+}
+
+/* About Us */
+.about-us {
+  text-align: center;
+}
+
+/* User Accounts */
+.user-accounts {
+  text-align: center;
+}
+
+.user-accounts .btn {
+  background-color: rgb(61, 35, 35);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.user-accounts .btn:hover {
+  background-color: #4a2d2d;
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+}
+
+.testimonials blockquote {
+  font-style: italic;
+}
+
+.testimonials footer {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: #ffffff;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  border-top: 4px solid rgb(61, 35, 35);
+  position: relative;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-media {
+  margin-top: 20px;
+}
+
+.social-media a {
+  margin: 0 10px;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.social-media a:hover {
+  color: rgb(61, 35, 35);
+}

@@ -1,0 +1,16 @@
+<div class="login-container">
+  <h1>Log In</h1>
+  <form>
+    <!-- Add form fields for logging in -->
+    <label for="email">Email:</label>
+    <input id="email" type="email" name="email" required>
+    
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="password" required>
+
+    <button type="submit">Log In</button>
+  </form>
+  <p class="signup-prompt">
+    Don't have an account? <a [routerLink]="['/signup']">Sign Up</a>
+  </p>
+</div>
