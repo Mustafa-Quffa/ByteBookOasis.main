@@ -1,0 +1,56 @@
+<footer [ngClass]="{'footer-hidden': !showFooter, 'footer-visible': showFooter}">
+    <div class="footer-container">
+        <!-- Contact Us Section -->
+        <section class="contact-us">
+            <h3>Contact Us</h3>
+            <div class="social-media">
+                <a href="https://wa.me/yourphonenumber" target="_blank">
+                    <fa-icon [icon]="faWhatsapp"></fa-icon>
+                  </a>
+                  <a href="tel:+1234567890">
+                    <fa-icon [icon]="faPhone"></fa-icon>
+                  </a>
+                  <a href="mailto:support@example.com">
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                  </a>
+            </div>
+        </section>
+        
+        <!-- Follow Us Section -->
+        <section class="follow-us">
+            <h3>Follow Us</h3>
+            <div class="social-media">
+                <a href="https://www.facebook.com" target="_blank">
+                    <fa-icon [icon]="faFacebook"></fa-icon>
+                  </a>
+                  <a href="https://www.twitter.com" target="_blank">
+                    <fa-icon [icon]="faTwitter"></fa-icon>
+                  </a>
+                  <a href="https://www.instagram.com" target="_blank">
+                    <fa-icon [icon]="faInstagram"></fa-icon>
+                  </a>
+            </div>
+        </section>       
+        <!-- Policies Section -->
+        <section class="policies">
+            <h3>Policies</h3>
+            <div class="footer-content">
+                <ul class="policy-links">
+                  <li><a href="/privacy-policy">Privacy Policy</a></li>
+                  <li><a href="/terms-of-service">Terms of Service</a></li>
+                  <li><a href="/borrowing-policies">Borrowing Policies</a></li>
+                  <li><a href="/returns-and-renewals">Returns and Renewals</a></li>
+                </ul>
+              </div>
+        </section>
+        
+        <!-- Footer Copyright -->
+        <section class="footer-copyright">
+            <p>© bytebookoasis. All rights reserved.</p>
+            <!-- Add scroll to top button -->
+             <div class="backOnTopButton">
+              <button (click)="scrollToTop()">Back to Top</button>
+             </div>
+        </section>
+    </div>
+</footer>

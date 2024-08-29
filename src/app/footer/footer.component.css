@@ -1,0 +1,151 @@
+/* Hide or show footer with transition */
+/* Hide or show footer with smooth transitions */
+.footer-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Faster transition */
+}
+  
+  .footer-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* General Footer Styles */
+  footer {
+    color: rgb(61, 35, 35); /* Dark text color for contrast */
+    padding: 20px;
+    font-size: 14px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for visibility */
+    background-color: #dbb29b;
+    border-top: 2px solid #3e230a; /* Line above the footer */
+}
+  
+/* Footer Container */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+/* Section Styles */
+section {
+    margin-bottom: 20px;
+}
+
+/* Contact Us Section */
+.contact-us h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-item i {
+    margin-right: 10px;
+}
+
+.contact-item a {
+    color: rgb(61, 35, 35);
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    text-decoration: underline;
+}
+
+/* Follow Us Section */
+.follow-us h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.social-media {
+    display: flex;
+}
+
+.social-media a {
+    color: #343a40;
+    margin-right: 15px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    color: rgb(61, 35, 35);
+}
+
+/* Policies Section */
+.policies h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.policy-links {
+    list-style: none;
+    padding: 0;
+}
+
+.policy-links li {
+    margin-bottom: 10px;
+}
+
+.policy-links a {
+    color: rgb(61, 35, 35);
+    text-decoration: none;
+}
+
+.policy-links a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Copyright */
+.footer-copyright {
+    border-top: 1px solid rgb(61, 35, 35);
+    padding-top: 10px;
+    text-align: center;
+}
+.backOnTopButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+  
+  .backOnTopButton button {
+    background-color: rgb(61, 35, 35); /* Tailwind Blue color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .backOnTopButton button:hover {
+    background-color: #000000; /* Darker blue on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .backOnTopButton button:focus {
+    outline: none;
+  }
+  

@@ -1,0 +1,16 @@
+<button id="dropdownUserAvatarButton" class="profile-btn" (click)="toggleDropdown()">
+  <img class="w-8 h-8 rounded-full" src="../../assets/logo.png" alt="User Profile">
+</button>
+
+<div id="dropdownAvatar" class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
+  <div class="profile-info">
+      <div>{{ user.name }}</div>
+      <div>{{ user.email }}</div>
+  </div>
+  <ul>
+      <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+      <li><a [routerLink]="['/settings']">Settings</a></li>
+      <li><a [routerLink]="['/profile']">Edit Profile</a></li>
+      <li><a (click)="logout()">Sign out</a></li>
+  </ul>
+</div>

@@ -1,0 +1,32 @@
+/* Footer Styles */
+.footer {
+  background-color: aliceblue;
+  color: #333; /* Text color */
+  padding: 2rem; /* Padding around the content */
+  text-align: right; /* Center-align text */
+  width: 100%; /* Ensure the footer spans the full width of the page */
+  box-sizing: border-box; /* Include padding in width */
+  position: sticky; /* Fix the footer at the bottom of the page */
+  bottom: 0;
+  left: 0;
+}
+
+.footer-content h2 {
+  font-size: 1.8rem; /* Font size for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+}
+
+.footer-content p {
+  font-size: 1.2rem; /* Font size for the paragraph */
+  margin: 0; /* Remove default margin */
+}
+
+/* Additional Styling */
+.footer-content {
+  max-width: 1200px; /* Max width for the content */
+  margin: 0 auto; /* Center the content horizontally */
+}
+
+.footer-content p, .footer-content h2 {
+  margin: 0.5rem 0; /* Space between paragraphs and heading */
+}
