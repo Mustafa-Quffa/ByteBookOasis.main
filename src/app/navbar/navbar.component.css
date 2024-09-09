@@ -5,8 +5,8 @@
   align-items: center;
   padding: 29px 200px; /* Adjust padding */
   border-bottom: 2px solid rgba(62, 35, 10, 0.3);  /* Barely visible line under the navbar */
+  background-color: #ffffff;
 }
-
 
 .profile-btn {
   margin-left: 1rem; /* Adjust as needed */
@@ -110,7 +110,7 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
-  opacity: 2; /* Show with opacity */
+  opacity: 1; /* Show with opacity */
   visibility: visible; /* Make visible */
 }
 
@@ -160,7 +160,8 @@
   }
 
   .logo {
-    margin-bottom: 10px; /* Space between logo and menu */
+    margin-bottom: 10px;
+    margin-right:150px ; /* Space between logo and menu */
   }
 
   .nav-links {
@@ -234,5 +235,16 @@
     border-radius: 0;
     opacity: 1; /* Always visible on mobile */
     visibility: visible; /* Always visible on mobile */
+  }
+
+  /* Ensure menu toggle and profile dropdown are inline */
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu-toggle, app-profile-dropdown {
+    display: flex;
   }
 }

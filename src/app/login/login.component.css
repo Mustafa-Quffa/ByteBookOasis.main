@@ -1,11 +1,12 @@
+.back{
+  background-color: bisque;
+}
 .login-container {
   max-width: 400px;
   margin: auto;
   margin-top: 5%;
   padding: 2rem;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f8f9fa;
 }
 
 h1 {
