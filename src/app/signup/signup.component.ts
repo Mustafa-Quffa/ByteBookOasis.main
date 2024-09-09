@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { MockAuthService } from '@services/mock-auth.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone:true,
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  imports:[FontAwesomeModule]
+  
+  imports:[FontAwesomeModule,RouterModule]
 })
 export class SignupComponent {
 
