@@ -87,14 +87,14 @@
   z-index: 1;
   position: relative;
   background: none;
-  border: black;
-  color: #412323;
+  color: rgb(255, 255, 255); /* Change the text color */
+  background-color: rgb(61,35,35);
   padding-left: 0;
-  border-radius: 15px;
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
 }
+
 
 .signup-section .login-link {
   text-align: center;

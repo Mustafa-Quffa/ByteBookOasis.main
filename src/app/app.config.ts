@@ -1,9 +1,10 @@
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 export const appConfig = {
   providers: [
-    provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync()
+    provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())
   ]
 };

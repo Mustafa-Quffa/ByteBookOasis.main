@@ -7,12 +7,11 @@ import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.co
 
 
 
-let lastScrollTop = 0;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent,CommonModule,ProfileDropdownComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent,CommonModule,ProfileDropdownComponent ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

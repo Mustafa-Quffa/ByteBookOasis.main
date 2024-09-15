@@ -14,12 +14,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
+
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'books', component: BooksComponent },
   { path: 'contact us', component: ContactComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'about us', component: AboutUsComponent},
   {path: 'profile',component:ProfileComponent},
   { path: '**', redirectTo: '' }

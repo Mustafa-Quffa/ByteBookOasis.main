@@ -1,30 +1,45 @@
 import { Component } from '@angular/core';
-import { MockAuthService } from '@services/mock-auth.service';
-import { RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from './login.service'; // Adjust the path as necessary
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  standalone:true,
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports:[RouterModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule] 
 })
 export class LoginComponent {
+  
+  loginForm: FormGroup;
 
-  username: string = '';
-  password: string = '';
-  message: string = '';
-
-  constructor(private authService: MockAuthService) { }
-
-  login() {
-    this.authService.login(this.username, this.password).subscribe((response: { success: any; message: string; }) => {
-      if (response.success) {
-        this.message = 'Login successful!';
-        // Handle successful login, e.g., navigate to another page
-      } else {
-        this.message = response.message;
-      }
+  constructor(
+    private fb: FormBuilder,
+    private logInService: LoginService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.logInService.login({ email, password }).subscribe({
+        next: (response) => {
+          console.log('Login successful', response);
+          // Handle successful login, e.g., store tokens, redirect, etc.
+          this.router.navigate(['/']); // Adjust the route as necessary
+        },
+        error: (error) => {
+          console.error('Login failed', error);
+          // Handle error, e.g., show an error message
+        }
+      });
+    }
   }
 }
