@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons'; // Import the icon
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfileDropdownComponent } from 'app/profile-dropdown/profile-dropdown.component';
 import { LoginService } from 'app/login/login.service';
@@ -16,15 +16,15 @@ import { LoginService } from 'app/login/login.service';
     CommonModule, 
     FontAwesomeModule, 
     ProfileDropdownComponent
-  ], // Only modules and components should go in imports
+  ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
   isAuthenticated: boolean = false;
-  faBookOpen = faBookOpen; // Assign the icon to a class property
+  faBookOpen = faBookOpen;
 
-  constructor(private loginService: LoginService) {} // Ensure injection
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.loginService.isAuthenticated().subscribe(isAuthenticated => {
@@ -34,8 +34,8 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.loginService.logout();
-    this.isAuthenticated = false; // Update local state
-    // Optionally, redirect or perform other actions after logout
+    this.isAuthenticated = false;
+    // Optionally redirect or perform other actions after logout
   }
 
   menuActive: boolean = false;

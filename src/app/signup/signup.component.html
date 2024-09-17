@@ -1,68 +1,114 @@
-<div class="signup-section" id="signup">
-  <h2>Signup</h2>
-  <form [formGroup]="signupForm" class="signup-form" (ngSubmit)="onSubmit()">
-    <!-- First Name Field -->
-    <div class="field">
-      <input type="text" placeholder="First Name" formControlName="first_name" required>
+<div class="signup-section">
+  <!-- Display success message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Display error message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Signup form -->
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+
+      <!-- First Name -->
+      <div class="field">
+        <label for="first_name">First Name:</label>
+        <input id="first_name" formControlName="first_name" type="text" placeholder="First Name">
+        <div *ngIf="signupForm.get('first_name')?.invalid && signupForm.get('first_name')?.touched" class="error">
+          <small *ngIf="signupForm.get('first_name')?.errors?.['required']">First name is required.</small>
+          <small *ngIf="signupForm.get('first_name')?.errors?.['pattern']">First name can only contain letters.</small>
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="field">
+        <label for="last_name">Last Name:</label>
+        <input id="last_name" formControlName="last_name" type="text" placeholder="Last Name">
+        <div *ngIf="signupForm.get('last_name')?.invalid && signupForm.get('last_name')?.touched" class="error">
+          <small *ngIf="signupForm.get('last_name')?.errors?.['required']">Last name is required.</small>
+          <small *ngIf="signupForm.get('last_name')?.errors?.['pattern']">Last name can only contain letters.</small>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="field">
+        <label for="user_name">Username:</label>
+        <input id="user_name" formControlName="user_name" type="text" placeholder="Username">
+        <div *ngIf="signupForm.get('user_name')?.invalid && signupForm.get('user_name')?.touched" class="error">
+          <small *ngIf="signupForm.get('user_name')?.errors?.['required']">Username is required.</small>
+        </div>
+      </div>
+
+      <!-- Age -->
+      <div class="field">
+        <label for="age">Age:</label>
+        <input id="age" formControlName="age" type="number" placeholder="Age">
+        <div *ngIf="signupForm.get('age')?.invalid && signupForm.get('age')?.touched" class="error">
+          <small *ngIf="signupForm.get('age')?.errors?.['required']">Age is required.</small>
+          <small *ngIf="signupForm.get('age')?.errors?.['min']">Age must be at least 1.</small>
+          <small *ngIf="signupForm.get('age')?.errors?.['max']">Age must be less than 150.</small>
+        </div>
+      </div>
+
+      <!-- Nationality -->
+      <div class="field">
+        <label for="nationality_id">Nationality:</label>
+        <select id="nationality_id" formControlName="nationality_id">
+          <option *ngFor="let nationality of nationalities" [value]="nationality.id">
+            {{ nationality.name }}
+          </option>
+        </select>
+        <div *ngIf="signupForm.get('nationality_id')?.invalid && signupForm.get('nationality_id')?.touched" class="error">
+          <small *ngIf="signupForm.get('nationality_id')?.errors?.['required']">Nationality is required.</small>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" placeholder="Email">
+        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error">
+          <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <label for="password">Password:</label>
+        <input id="password" formControlName="password" type="password" placeholder="Password">
+        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error">
+          <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+        </div>
+      </div>
+
+      <!-- Role -->
+      <div class="field">
+        <label for="role">Role:</label>
+        <select id="role" formControlName="role">
+          <option value="customer">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched" class="error">
+          <small *ngIf="signupForm.get('role')?.errors?.['required']">Role is required.</small>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Last Name Field -->
-    <div class="field">
-      <input type="text" placeholder="Last Name" formControlName="last_name" required>
+    <!-- Submit Button -->
+    <div class="btn">
+      <div class="btn-layer"></div>
+      <button type="submit">Sign Up</button>
     </div>
 
-    <!-- Username Field -->
-    <div class="field">
-      <input type="text" placeholder="Username" formControlName="user_name" required>
-    </div>
-
-    <!-- Age Field -->
-    <div class="field">
-      <input type="number" placeholder="Age" formControlName="age" min="1" max="150" required>
-    </div>
-
-    <!-- Nationalities Dropdown (Dynamically Loaded) -->
-    <div class="field">
-      <select formControlName="nationality_id" required>
-        <option value="" disabled selected>Select Nationality</option>
-        <option *ngFor="let nationality of nationalities" [value]="nationality">
-          {{ nationality }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Email Address Field -->
-    <div class="field">
-      <input type="email" placeholder="Email Address" formControlName="email" required>
-    </div>
-
-    <!-- Password Field -->
-    <div class="field">
-      <input type="password" placeholder="Password" formControlName="password" required>
-    </div>
-
-    <!-- Confirm Password Field
-    <div class="field">
-      <input type="password" placeholder="Confirm password" formControlName="confirm_password" required>
-    </div> -->
-
-    <!-- Role Dropdown -->
-    <div class="field">
-      <select formControlName="role" required>
-        <option value="" disabled selected>Select Role</option>
-        <option value="customer">Customer</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-
-    <!-- Signup Button -->
-    <div class="field btn">
-      <input type="submit" value="Signup" [disabled]="signupForm.invalid">
-    </div>
-
-    <!-- Login Link -->
+    <!-- Link to login -->
     <div class="login-link">
-      Are you a member? <a [routerLink]="['/login']">Login now</a>
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
     </div>
   </form>
 </div>

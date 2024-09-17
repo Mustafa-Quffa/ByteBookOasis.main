@@ -1,136 +1,125 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #4e342e; 
-  font-family: "Poppins", sans-serif;
-}
-
-
 .login-section {
-  overflow: hidden;
-  width: 500px; 
-  background: #ffffff; 
-  padding: 70px;
-  border-radius: 15px;
-  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-  margin-top: 150px;
-  position:sticky;
-  left:50%;
-  transform: translateX(-50%); 
+  width: 100%;
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px; /* Rounded corners for the section */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for a subtle 3D effect */
 }
-  
 
-
-
-.login-section h2 {
-  font-size: 35px;
+h1 {
+  font-size: 36px; /* Adjust font size for the h1 tag */
   font-weight: 600;
-  text-align: center;
+  text-align: center; /* Center text */
+  color: rgb(61, 35, 35); /* Set color */
+  margin-bottom: 20px; /* Space below the h1 */
+}
+
+.alert {
+  padding: 10px;
   margin-bottom: 20px;
-  color: #412323;
+  border-radius: 4px;
 }
 
-.login-section .field {
-  height: 50px;
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgb(61, 35, 35); /* Consistent color for labels */
+}
+
+.field input,
+.field select {
   width: 100%;
-  margin-top: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc; /* Light border for inputs and selects */
+  border-radius: 4px; /* Rounded corners for inputs and selects */
 }
 
-.login-section .field input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 15px;
-  border: 1px solid lightgrey;
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
+.error small {
+  color: red;
 }
 
-.login-section .field input:focus {
-  border-color: #1a75ff;
-}
-
-.login-section .field input::placeholder {
-  color: #999;
-  transition: all 0.3s ease;
-}
-
-.login-section .field input:focus::placeholder {
-  color: #1a75ff;
-}
-
-.login-section .pass-link {
-  margin-top: 5px;
-}
-
-.login-section .pass-link a {
-  color: #1a75ff;
-  text-decoration: none;
-}
-
-.login-section .pass-link a:hover {
-  text-decoration: underline;
-}
-
-.login-section .btn {
-  height: 50px;
-  width: 100%;
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
-  margin-top: 20px;
-}
-
-.login-section .btn .btn-layer {
-  height: 100%;
-  width: 300%;
-  position: absolute;
-  left: -100%;
-  background: -webkit-linear-gradient(
-    right,
-    #3e2723, /* Dark brown */
-    #4e342e, /* Dark brown */
-    #6d4c41, /* Dark brown */
-    #8d6e63  /* Dark brown */
-  );
-  border-radius: 15px;
-  transition: all 0.4s ease;
-}
-
-.login-section .btn:hover .btn-layer {
-  left: 0;
-}
-
-.login-section .btn input[type="submit"] {
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  position: relative;
-  background: none;
-  border: none;
-  color:rgb(65,35,35);
-  padding-left: 0;
-  border-radius: 15px;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.login-section .signup-link {
+.btn {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px; /* Center the button with margin-top */
 }
 
-.login-section .signup-link a {
-  color: #1a75ff;
-  text-decoration: none;
+.btn-layer {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.login-section .signup-link a:hover {
-  text-decoration: underline;
+.btn button {
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(61, 35, 35); /* Consistent color for the button */
+  color: white;
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners for the button */
+  display: inline-block; /* Ensure it respects text-align center */
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-link a {
+  color: #007bff; /* Blue color for the signup link */
+  text-decoration: none; /* Remove underline */
+}
+
+.signup-link a:hover {
+  text-decoration: underline; /* Underline on hover for better UX */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-section {
+    margin: 20px; /* Reduce margin on smaller screens */
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .btn {
+    margin-left: 0; /* Remove left margin for the button */
+  }
+
+  .btn button {
+    width: 100%; /* Make the button full width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .login-section {
+    margin: 10px; /* Further reduce margin on very small screens */
+    padding: 10px; /* Further reduce padding on very small screens */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Reduce font size for headings on very small screens */
+  }
+
+  .field input,
+  .field select {
+    font-size: 0.9rem; /* Reduce font size for inputs and selects on very small screens */
+  }
 }

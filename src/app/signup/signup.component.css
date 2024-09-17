@@ -1,45 +1,55 @@
 .signup-section {
   overflow: hidden;
-  width: 500px;  
+  width: 90%;  /* Adjust width for responsiveness */
+  max-width: 500px; /* Limit maximum width */
   background: #fff;
-  padding: 30px;
-  position: absolute;
-  left: 50%;  
-  transform: translateX(-50%);    
-  border-radius: 15px;
-  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Adjust padding for smaller screens */
+  margin: 20px auto; /* Center horizontally with margin */
+  border-radius: 8px; /* Match rounded corners of the login section */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match shadow */
 }
 
-  
-
-
-.signup-section h2 {
-  font-size: 35px;
+.signup-section h1 {
+  font-size: 36px; /* Adjust font size for the h1 tag */
   font-weight: 600;
-  text-align: center;
-  margin-bottom: 20px;
-  color :rgb(61,35,35)
+  text-align: center; /* Center text */
+  color: rgb(61, 35, 35); /* Set color */
+  margin-bottom: 20px; /* Space below the h1 */
 }
 
-.signup-section .field {
-  height: 50px;
-  width: 100%;
+.signup-section .form-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 15px; /* Adjust gap for smaller screens */
   margin-top: 20px;
 }
 
-.signup-section .field input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 15px;
+.signup-section .form-group .field {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-section label {
+  font-size: 14px; /* Adjust font size for smaller screens */
+  color: rgb(61, 35, 35);
+  font-weight: 500;
+}
+
+.signup-section .field input,
+.signup-section .field select {
+  height: 40px; /* Adjust height for smaller screens */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding and borders in the width */
+  padding: 10px; /* Adjust padding for smaller screens */
+  border-radius: 4px; /* Rounded corners for consistency */
   border: 1px solid lightgrey;
   border-bottom-width: 2px;
-  font-size: 17px;
+  font-size: 14px; /* Adjust font size for smaller screens */
   transition: all 0.3s ease;
 }
 
-.signup-section .field input:focus {
+.signup-section .field input:focus,
+.signup-section .field select:focus {
   border-color: #1a75ff;
 }
 
@@ -53,52 +63,37 @@
 }
 
 .signup-section .btn {
-  height: 50px;
-  width: 100%;
-  border-radius: 15px;
+
+  max-width: 200px; /* Limit width if needed */
+  border-radius: 4px; /* Match rounded corners of the login button */
   position: relative;
   overflow: hidden;
-  margin-top: 20px;
+  margin: 20px auto; /* Center button horizontally */
 }
 
-.signup-section .btn .btn-layer {
-  height: 100%;
-  width: 300%;
-  position: absolute;
-  left: -100%;
-  background: -webkit-linear-gradient(
-    right,
-    #003366,
-    #004080,
-    #0059b3,
-    #0073e6
-  );
-  border-radius: 15px;
-  transition: all 0.4s ease;
-}
 
-.signup-section .btn:hover .btn-layer {
-  left: 0;
-}
 
-.signup-section .btn input[type="submit"] {
+
+
+.signup-section .btn button {
   height: 100%;
   width: 100%;
   z-index: 1;
   position: relative;
-  background: none;
-  color: rgb(255, 255, 255); /* Change the text color */
-  background-color: rgb(61,35,35);
-  padding-left: 0;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
+  background: rgb(61, 35, 35); /* Consistent background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  font-size: 14px; /* Match font size with login button */
+  font-weight: 500; /* Consistent font weight */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 0 20px; /* Horizontal padding to fit content */
+  border-radius: 4px; /* Match rounded corners */
+  display: inline-block; /* Ensure proper alignment */
 }
-
 
 .signup-section .login-link {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px; /* Adjust margin for smaller screens */
 }
 
 .signup-section .login-link a {
@@ -109,24 +104,27 @@
 .signup-section .login-link a:hover {
   text-decoration: underline;
 }
-.signup-section .field select {
-  height: 50px; 
-  width: 100%; 
-  outline: none;
-  padding-left: 15px; 
-  border-radius: 15px;
-  border: 1px solid lightgrey;
-  border-bottom-width: 2px;
-  font-size: 17px;
-  background-color: #fff; 
-  transition: all 0.3s ease;
-  appearance: none; 
+
+.alert {
+  padding: 10px; /* Adjust padding for smaller screens */
+  margin-bottom: 15px; /* Adjust margin for smaller screens */
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 
-.signup-section .field select:focus {
-  border-color: rgb(61,35,35);
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
 
-.signup-section .field select option {
-  color: #333;
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.error {
+  color: red;
+  font-size: 12px; /* Adjust font size for error messages */
 }

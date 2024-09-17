@@ -19,9 +19,8 @@ export class SignupService {
 
   // API call to sign up a user
   signup(userData: any): Observable<any> {
-    return this.http.post<any>(this.signupUrl, userData).pipe(
-      catchError(this.handleError) // Error handling
-    );
+    return this.http.post<any>(this.signupUrl, userData)
+    
   }
 
   // Handle HTTP errors

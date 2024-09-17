@@ -1,20 +1,48 @@
 <div class="login-section">
-  <h2>Login</h2>
-  <form action="#" class="login-form">
-    <div class="field">
-      <input type="email" placeholder="Email Address" required>
+  <h1>Login</h1>
+
+  <!-- Display success message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Display error message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Login form -->
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" placeholder="Email">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <label for="password">Password:</label>
+        <input id="password" formControlName="password" type="password" placeholder="Password">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <input type="password" placeholder="Password" required>
+
+    <!-- Submit Button -->
+    <div class="btn">
+      <div class="btn-layer"></div>
+      <button type="submit">Login</button>
     </div>
-    <div class="pass-link">
-      <a href="#">Forgot password?</a>
-    </div>
-    <div class="field btn">
-      <input type="submit" value="Login">
-    </div>
+
+    <!-- Link to signup -->
     <div class="signup-link">
-      Not a member? <a [routerLink]="['/signup']">Signup now</a>
+      <p>Don't have an account? <a routerLink="/signup">Sign up here</a></p>
     </div>
   </form>
 </div>

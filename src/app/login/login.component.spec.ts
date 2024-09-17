@@ -1,11 +1,10 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { LoginService } from './login.service';
-import { HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { of, throwError } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -20,7 +19,7 @@ describe('LoginComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, provideHttpClientTesting],
+      imports: [ReactiveFormsModule, HttpClientTestingModule],
       declarations: [LoginComponent],
       providers: [
         LoginService,
@@ -59,7 +58,7 @@ describe('LoginComponent', () => {
       password: 'password123'
     });
 
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
 
   it('should not submit the form if invalid', () => {
@@ -71,8 +70,7 @@ describe('LoginComponent', () => {
   });
 
   it('should handle failed login', () => {
-    const mockErrorResponse = { status: 401, statusText: 'Unauthorized' };
-    spyOn(loginService, 'login').and.returnValue(of(mockErrorResponse));
+    spyOn(loginService, 'login').and.returnValue(throwError(() => new Error('Login failed')));
 
     component.loginForm.controls['email'].setValue('wronguser@test.com');
     component.loginForm.controls['password'].setValue('wrongpassword');
@@ -83,6 +81,6 @@ describe('LoginComponent', () => {
 
     expect(loginService.login).toHaveBeenCalled();
     expect(router.navigate).not.toHaveBeenCalled();
-    // You can add more expectations for error handling if you display error messages
+    expect(component.errorMessage).toBe('Login failed. Please check your credentials and try again.');
   });
 });

@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   
   loginForm: FormGroup;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -27,19 +29,27 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.logInService.login({ email, password }).subscribe({
+    if (this.loginForm.valid) {  // Ensure the form is valid
+      this.logInService.login(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          // Handle successful login, e.g., store tokens, redirect, etc.
-          this.router.navigate(['/']); // Adjust the route as necessary
+          this.successMessage = 'Login successful!';  // Set success message
+          this.errorMessage = null;  // Clear any previous error message
+          
+          // Navigate to the home or dashboard page after successful login
+          this.router.navigate(['/home']);
         },
         error: (error) => {
-          console.error('Login failed', error);
-          // Handle error, e.g., show an error message
+          console.error('Login error', error);
+          this.successMessage = null;  // Clear any previous success message
+          this.errorMessage = 'Login failed. Please check your credentials and try again.';  // Set error message
+        },
+        complete: () => {
+          // Optionally handle completion if needed
         }
       });
+    } else {
+      this.errorMessage = 'Please fill out the form correctly.';  // Set error if the form is invalid
     }
   }
 }

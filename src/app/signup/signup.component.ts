@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   nationalities: any;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(
     private signupService: SignupService,
@@ -22,14 +24,19 @@ export class SignupComponent implements OnInit {
     private router: Router
   ) {
     this.signupForm = this.fb.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      first_name: [
+        '', 
+        [Validators.required, Validators.pattern('^[a-zA-Z]+$')] // Only letters allowed
+      ],
+      last_name: [
+        '', 
+        [Validators.required, Validators.pattern('^[a-zA-Z]+$')] // Only letters allowed
+      ],
       user_name: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(1), Validators.max(150)]],
       nationality_id: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirm_password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       role: ['', Validators.required],
     });
   }
@@ -42,29 +49,37 @@ export class SignupComponent implements OnInit {
     this.signupService.getNationalities().subscribe({
       next: (data) => {
         console.log('Nationalities data:', data);
-        this.nationalities = data.map(nationality => nationality.title); // Adjust according to response
+        this.nationalities = data.map(nationality => ({
+          id: nationality.id, // Use ID as value
+          name: nationality.title // Use name for display
+        }));
       },
       error: (error) => {
         console.error('Error fetching nationalities', error);
       }
     });
-  
   }
-
   onSubmit(): void {
     if (this.signupForm.valid) {
-      this.signupService.signup(this.signupForm.value).subscribe({
+      const formData = this.signupForm.value;
+      console.log('Form data:', formData);
+  
+      this.signupService.signup(formData).subscribe({
         next: (response) => {
           console.log('Signup successful', response);
+          this.successMessage = 'Signup successful!';
+          this.errorMessage = null;
           this.router.navigate(['/login']);
         },
         error: (error) => {
           console.error('Signup error', error);
+          this.successMessage = null;
+          this.errorMessage = 'Signup failed. Please try again.';
         },
-        complete: () => {
-          // Optionally handle completion if needed
-        }
       });
+    } else {
+      this.errorMessage = 'Please fill out the form correctly.';
     }
-}
+  }
+  
 }

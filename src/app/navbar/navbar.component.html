@@ -18,7 +18,21 @@
       <a [routerLink]="['/books']">Books</a>
     </li>
     <li><a href="#" (click)="scrollToBottom(); $event.preventDefault()">Contact Us</a></li>
-    <li><a [routerLink]="['/login']">Log In</a></li>
   </ul>
-  <app-profile-dropdown></app-profile-dropdown>
+  <!-- Display login section only if user is not authenticated -->
+  <ng-container *ngIf="!isAuthenticated">
+    <div class="login-section">
+      <a routerLink="/login">Login/</a>
+      <a routerLink="/signup">Signup</a>
+    </div>
+  </ng-container>
+
+  <!-- Display logout button only if user is authenticated -->
+  <ng-container *ngIf="isAuthenticated">
+    <div class="profile-section">
+      <fa-icon [icon]="faBookOpen"></fa-icon>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </ng-container>
+  <!-- <app-profile-dropdown></app-profile-dropdown> -->
 </nav>
