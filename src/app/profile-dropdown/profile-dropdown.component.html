@@ -1,16 +1,18 @@
-<button id="dropdownUserAvatarButton" class="profile-btn" (click)="toggleDropdown()">
+<!-- Only show the profile button if the user is authenticated -->
+<button *ngIf="isAuthenticated" id="dropdownUserAvatarButton" class="profile-btn" (click)="toggleDropdown()">
   <img class="w-8 h-8 rounded-full" src="../../assets/logo.png" alt="User Profile">
 </button>
 
+<!-- Use ngClass to toggle dropdown visibility based on dropdownOpen value -->
 <div id="dropdownAvatar" class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
   <div class="profile-info">
-      <div>{{ user.name }}</div>
-      <div>{{ user.email }}</div>
+    <div>{{ user.name }}</div> <!-- Display user name -->
+    <div>{{ user.email }}</div> <!-- Display user email -->
   </div>
   <ul>
-      <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
-      <li><a [routerLink]="['/settings']">Settings</a></li>
-      <li><a [routerLink]="['/profile']">Edit Profile</a></li>
-      <li><a (click)="logout()">Sign out</a></li>
+    <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+    <li><a [routerLink]="['/settings']">Settings</a></li>
+    <li><a [routerLink]="['/profile']">Edit Profile</a></li>
+    <li><a (click)="logout()">Sign out</a></li>
   </ul>
 </div>

@@ -53,7 +53,7 @@ export class FooterComponent implements OnInit {
 
   updateFooterVisibility(): void {
     const currentUrl = this.router.url;
-    if (['/login', '/signup'].includes(currentUrl)) {
+    if (['/forgot-password','/login', '/signup','/reset-password','reset-password/:token'].includes(currentUrl)) {
       this.showFooter = false;
     } else {
       this.checkScroll();

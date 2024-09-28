@@ -1,6 +1,4 @@
 import { RouterModule, Routes } from '@angular/router';
-import { BooksComponent } from './books/books.component';
-import { ContactComponent } from './contact/contact.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -9,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { ProfileComponent } from './profile/profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -18,13 +18,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'books', component: BooksComponent },
-  { path: 'contact us', component: ContactComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'about us', component: AboutUsComponent},
   {path: 'profile',component:ProfileComponent},
+  {path: 'reset-password', component:ResetPasswordComponent},
+  { path: 'reset-password/:token', component: ResetPasswordComponent },
+  {path: 'forgot-password',component:ForgotPasswordComponent},
   { path: '**', redirectTo: '' }
 ];
 

@@ -4,7 +4,7 @@
   max-width: 500px; /* Limit maximum width */
   background: #fff;
   padding: 20px; /* Adjust padding for smaller screens */
-  margin: 20px auto; /* Center horizontally with margin */
+  margin: 60px auto; /* Center horizontally with margin */
   border-radius: 8px; /* Match rounded corners of the login section */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match shadow */
 }
@@ -80,15 +80,15 @@
   width: 100%;
   z-index: 1;
   position: relative;
-  background: rgb(61, 35, 35); /* Consistent background color */
-  color: white; /* Text color */
-  border: none; /* Remove border */
-  font-size: 14px; /* Match font size with login button */
-  font-weight: 500; /* Consistent font weight */
-  cursor: pointer; /* Pointer cursor on hover */
-  padding: 0 20px; /* Horizontal padding to fit content */
-  border-radius: 4px; /* Match rounded corners */
-  display: inline-block; /* Ensure proper alignment */
+  background: rgb(61, 35, 35); 
+  color: white; 
+  border: none; 
+  font-size: 14px; 
+  font-weight: 500; 
+  cursor: pointer; 
+  padding: 0 20px; 
+  border-radius: 4px; 
+  display: inline-block; 
 }
 
 .signup-section .login-link {

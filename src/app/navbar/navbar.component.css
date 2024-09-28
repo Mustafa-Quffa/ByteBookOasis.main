@@ -1,15 +1,13 @@
 /* Navbar styles */
 .navbar {
   display: flex;
-  justify-content: space-between; /* Space between logo and menu items */
+  justify-content: space-between;
   align-items: center;
-  padding: 29px 200px; /* Adjust padding */
-  border-bottom: 2px solid rgba(62, 35, 10, 0.3);  /* Barely visible line under the navbar */
+  padding: 0px 200px; /* Adjust padding */
+  border-bottom: 2px solid rgba(62, 35, 10, 0.3); /* Barely visible line under the navbar */
   background-color: #ffffff;
-}
-
-.profile-btn {
-  margin-left: 1rem; /* Adjust as needed */
+  height: 80px; /* Set a consistent height */
+  box-sizing: border-box; /* Ensure padding doesn't affect the height */
 }
 
 /* Logo and Title */
@@ -28,7 +26,6 @@
 .logo span {
   font-size: 1.5rem; /* Adjust font size */
   color: rgb(61, 35, 35);
-  margin-left: 10px; /* Space between icon and text */
 }
 
 .navbar-icon {
@@ -40,7 +37,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem; /* Adjust gap between links */
   margin: 0;
   padding: 0;
 }
@@ -53,8 +50,12 @@
   position: relative;
 }
 
+.nav-links a:hover {
+  color: #69411b; /* Hover text color */
+}
+
 .nav-links a.active {
-  color: #69411b; /* Line color for active link */
+  color: #69411b; /* Active link color */
 }
 
 .nav-links a.active::after {
@@ -67,9 +68,20 @@
   background-color: #69411b; /* Line color */
 }
 
-.nav-links a:hover {
-  color: #69411b; /* Change text color on hover */
+/* Login/Logout buttons */
+ .login-section a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: rgb(61, 35, 35);
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 0rem;
+  
 }
+
+
 
 /* Dropdown styles */
 .dropdown {
@@ -85,107 +97,55 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  list-style: none;
   padding: 0;
   margin: 0;
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Start hidden */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Transition for fade effect */
-}
-
-.dropdown-content li {
-  padding: 0;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 12px 16px;
-  color: black;
-  text-decoration: none;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
+  opacity: 0; /* Hidden by default */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
-  opacity: 1; /* Show with opacity */
-  visibility: visible; /* Make visible */
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Avatar dropdown styles */
-#dropdownAvatar {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: none;
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Start hidden */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Transition for fade effect */
-}
-
-#dropdownUserAvatarButton:hover + #dropdownAvatar, 
-#dropdownAvatar:hover {
-  display: block;
-  opacity: 1; /* Show with opacity */
-  visibility: visible; /* Make visible */
-}
-
-/* Responsive Styles */
+/* Responsive styles */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 29px 100px; /* Adjust padding for tablets */
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .menu-toggle {
-    display: none; /* Hide menu toggle for larger screens */
+    padding: 0 100px; /* Adjust padding for smaller screens */
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 29px 15px; /* Adjust padding for mobile screens */
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the start */
+    padding: 0 15px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .logo {
     margin-bottom: 10px;
-    margin-right:150px ; /* Space between logo and menu */
   }
 
   .nav-links {
-    display: none; /* Hide nav links by default */
+    display: none;
     flex-direction: column;
     width: 100%;
     background-color: #dbb29b;
-    max-height: 0;
-    overflow: hidden;
   }
 
   .nav-links.nav-active {
-    display: flex; /* Show nav links when active */
-    max-height: 300px; /* Adjust max-height as needed */
+    display: flex;
+    max-height: 300px; /* Adjust max height */
   }
 
   .menu-toggle {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
     width: 30px;
     justify-content: space-between;
     height: 21px;
-    z-index: 1000; /* Ensure menu toggle is above other content */
   }
 
   .menu-toggle span {
@@ -195,56 +155,11 @@
   }
 
   .nav-links li {
-    width: 100%;
     text-align: center;
   }
 
   .nav-links li a {
     padding: 1rem;
     display: block;
-  }
-
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-    opacity: 1; /* Always visible on mobile */
-    visibility: visible; /* Always visible on mobile */
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  .dropdown-content {
-    display: block;
-  }
-
-  .dropdown:hover > a {
-    color: #69411b; /* Change color on hover */
-  }
-
-  .dropdown.active .dropdown-content {
-    display: block;
-  }
-
-  /* Avatar dropdown */
-  #dropdownAvatar {
-    position: static;
-    width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-    opacity: 1; /* Always visible on mobile */
-    visibility: visible; /* Always visible on mobile */
-  }
-
-  /* Ensure menu toggle and profile dropdown are inline */
-  .navbar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .menu-toggle, app-profile-dropdown {
-    display: flex;
   }
 }

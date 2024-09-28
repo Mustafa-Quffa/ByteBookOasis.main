@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private logInService: LoginService,
-    private router: Router
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -33,11 +33,28 @@ export class LoginComponent {
       this.logInService.login(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          this.successMessage = 'Login successful!';  // Set success message
-          this.errorMessage = null;  // Clear any previous error message
           
+          const loginInfo = {
+            email: response.email,
+            first_name: response.first_name,
+            last_name: response.last_name,
+            age: response.age,
+            user_name: response.user_name,
+            nationality: response.nationality,
+            role: response.role,
+            member_since: response.member_since,
+          }
+
+          localStorage.setItem('loggedInUser', JSON.stringify(loginInfo));
+          localStorage.setItem('token', response.token)
+          this.successMessage = 'Login successful!';
+          this.errorMessage = null;
+          // this.logInService.setAuthenticationStatus(true);
+          this.router.navigate(['/home']).then(() => {
+            // Reload the page after navigation
+            window.location.reload();
+          });
           // Navigate to the home or dashboard page after successful login
-          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Login error', error);
@@ -52,4 +69,7 @@ export class LoginComponent {
       this.errorMessage = 'Please fill out the form correctly.';  // Set error if the form is invalid
     }
   }
+
+  ngOnInit(): void {}
+    
 }
