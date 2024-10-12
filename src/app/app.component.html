@@ -1,5 +1,5 @@
 
-<app-navbar></app-navbar> <!-- Optional header component -->
+<app-navbar *ngIf="showNavbarAndFooter"></app-navbar> <!-- Optional header component -->
 
 <main>
     <router-outlet></router-outlet> <!-- Renders routed components -->
@@ -7,4 +7,4 @@
 <div class="">
     <router-outlet></router-outlet>
 </div>
-<app-footer *ngIf="showFooter"></app-footer>
+<app-footer *ngIf="showFooter",*ngIf="showNavbarAndFooter"></app-footer>

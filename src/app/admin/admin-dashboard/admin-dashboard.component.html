@@ -1,0 +1,60 @@
+<div class="admin-dashboard">
+   <app-custom-layout></app-custom-layout>
+   
+    <div class="main-content">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <div class="user-profile">
+                <app-profile-dropdown></app-profile-dropdown>
+            </div>
+        </header>
+
+        <section class="dashboard-overview">
+            <div class="card">
+                <h2>Total Users</h2>
+                <p>{{ dashboardData.totalUsers }}</p>
+            </div>
+            <div class="card">
+                <h2>Total Books</h2>
+                <p>{{ dashboardData.totalBooks }}</p>
+            </div>
+            <div class="card">
+                <h2>Active Borrowings</h2>
+                <p>{{ dashboardData.activeBorrowings }}</p>
+            </div>
+        </section>
+
+        <section class="charts">
+            <h2>Activity Overview</h2>
+            <div class="chart-container">
+                <div class="chart">Bar Chart Placeholder</div>
+                <div class="chart">Line Chart Placeholder</div>
+            </div>
+        </section>
+
+        <!-- <section class="admin-users">
+            <h2>Users</h2>
+            <ul>
+                <li *ngFor="let user of users">
+                    {{ user.name }} ({{ user.email }})
+                </li>
+            </ul>
+        </section>
+
+        <section class="admin-books">
+            <h2>Books</h2>
+            <ul>
+                <li *ngFor="let book of books">
+                    {{ book.title }} by {{ book.author }}
+                </li>
+            </ul>
+        </section> -->
+
+        <section class="admin-actions">
+            <h2>Quick Actions</h2>
+            <button>Add New Book</button>
+            <button>Approve Pending Borrow Request</button>
+            <button>Generate Report</button>
+        </section>
+    </div>
+</div>

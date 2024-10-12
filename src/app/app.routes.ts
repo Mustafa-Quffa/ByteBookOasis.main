@@ -9,6 +9,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
+import { AdminGuard } from './guards/admin.guard';
 
 
 
@@ -17,6 +21,14 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 
 
 export const routes: Routes = [
+  {
+    path: 'admin',
+    children: [
+      { path: 'dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] },
+      { path: 'users', component: AdminUsersComponent, canActivate: [AdminGuard] },
+      { path: 'books', component: AdminBooksComponent, canActivate: [AdminGuard] },
+    ]
+  },
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },

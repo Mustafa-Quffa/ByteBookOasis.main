@@ -49,13 +49,19 @@ export class LoginComponent {
           localStorage.setItem('token', response.token)
           this.successMessage = 'Login successful!';
           this.errorMessage = null;
-          // this.logInService.setAuthenticationStatus(true);
+              // Check user role and navigate accordingly
+        if (response.role === 'admin') {
+          this.router.navigate(['/admin/dashboard']).then(() => {
+            // Reload the page after navigation
+            window.location.reload();
+          });
+        } else {
           this.router.navigate(['/home']).then(() => {
             // Reload the page after navigation
             window.location.reload();
           });
-          // Navigate to the home or dashboard page after successful login
-        },
+        }
+      },
         error: (error) => {
           console.error('Login error', error);
           this.successMessage = null;  // Clear any previous success message

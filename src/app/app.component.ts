@@ -18,11 +18,19 @@ import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.co
 export class AppComponent {
   title = 'ByteBookOasis';
   showFooter: boolean = true;
+  showNavbarAndFooter = true; // Variable to control visibility
+
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.showFooter = !['/login', '/signup'].includes(this.router.url);
+      }
+    });
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Update the visibility based on the route
+        this.showNavbarAndFooter = !event.url.startsWith('/admin'); // Change '/admin' to your actual admin route
       }
     });
   }
