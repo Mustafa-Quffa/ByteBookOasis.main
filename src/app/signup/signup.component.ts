@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
       nationality_id: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      role: ['', Validators.required],
     });
   }
 

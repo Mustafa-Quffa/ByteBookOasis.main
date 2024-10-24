@@ -1,1 +1,84 @@
-<p>admin-books works!</p>
+<div class="admin-books-container">
+  <app-custom-layout></app-custom-layout>
+  <div class="main-content">
+      <header>
+          <h1>Admin Books Management</h1>
+          <div class="user-profile">
+              <app-profile-dropdown></app-profile-dropdown>
+          </div>
+      </header>
+
+      <!-- Book Stats Section -->
+      <section class="dashboard-overview book-stats">
+          <div class="card">
+              <h2>Total Books</h2>
+              <!-- <p>{{ totalBooks }}</p> -->
+          </div>
+          <div class="card">
+              <h2>Available Books</h2>
+              <!-- <p>{{ availableBooks }}</p> -->
+          </div>
+          <div class="card">
+              <h2>Borrowed Books</h2>
+              <!-- <p>{{ borrowedBooks }}</p> -->
+          </div>
+          <div class="card">
+              <h2>Genres</h2>
+              <!-- <p>{{ totalGenres }}</p> -->
+          </div>
+      </section>
+
+      <!-- Management Links -->
+      <section class="admin-actions management-links">
+          <h2>Quick Actions</h2>
+          <button mat-button (click) = "openModel()" >Click me</button>
+            <button routerLink="/borrowed-books" mat-raised-button color="accent">View Borrowed Books</button>
+      </section>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+          <mat-form-field class="full-width">
+              <input matInput type="text" placeholder="Search for books..." [(ngModel)]="search" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="searchBooks()">Search</button>
+      </div>
+
+      <!-- Book List Table -->
+      <section class="book-list">
+          <h2>Books</h2>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Title</th>
+                      <th>Author</th>
+                      <th>Language</th>
+                      <th>Price</th>
+                      <th>Year</th>
+                      <th>Copies</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let book of books">
+                      <td>{{ book.title }}</td>
+                      <td>{{ book.author }}</td>
+                      <td>{{ book.language }}</td>
+                      <td>{{ book.price }}</td>
+                      <td>{{ book.publish_year }}</td>
+                      <td>{{ book.num_of_copies }}</td>
+                      <td>{{ book.status }}</td>
+                      <td>
+                          <button mat-icon-button color="accent" (click)="editBook(book)" matTooltip="Edit">
+                              <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="warn" (click)="deleteBook(book.id!)" matTooltip="Delete">
+                              <mat-icon>delete</mat-icon>
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </section>
+  </div>
+</div>

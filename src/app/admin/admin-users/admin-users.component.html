@@ -1,1 +1,81 @@
-<p>admin-users works!</p>
+<div class="admin-users-container">
+  <app-custom-layout></app-custom-layout>
+  
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Header Section -->
+    <header>
+      <h1>Admin Users Management</h1>
+      <div class="user-profile">
+        <!-- Ensure profile dropdown is placed within the container -->
+        <app-profile-dropdown></app-profile-dropdown>
+      </div>
+    </header>
+
+    <!-- User Stats Section -->
+    <section class="dashboard-overview user-stats">
+      <div class="card">
+        <h2>Total Users</h2>
+        <!-- <p>{{ totalUsers }}</p> -->
+      </div>
+      <div class="card">
+        <h2>Active Users</h2>
+        <!-- <p>{{ activeUsers }}</p> -->
+      </div>
+      <div class="card">
+        <h2>Inactive Users</h2>
+        <!-- <p>{{ inactiveUsers }}</p> -->
+      </div>
+      <div class="card">
+        <h2>Admins</h2>
+        <!-- <p>{{ totalAdmins }}</p> -->
+      </div>
+    </section>
+
+    <!-- Management Links -->
+    <section class="admin-actions management-links">
+      <h2>Quick Actions</h2>
+      <button mat-button (click)="openAddUserModel()">Add New User</button>
+      <button routerLink="/admin-activities" mat-raised-button color="accent">View Admin Activities</button>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Search for users..." [(ngModel)]="search" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="searchUsers()">Search</button>
+    </div>
+
+    <!-- User List Table -->
+    <section class="user-list">
+      <h2>Users</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <!-- <td>{{ user.name }}</td> -->
+            <!-- <td>{{ user.email }}</td> -->
+            <!-- <td>{{ user.status }}</td> -->
+            <td>
+              <button mat-icon-button color="accent" (click)="editUser(user)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteUser(user.id)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

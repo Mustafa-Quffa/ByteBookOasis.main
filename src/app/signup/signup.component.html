@@ -87,16 +87,7 @@
       </div>
 
       <!-- Role -->
-      <div class="field">
-        <label for="role">Role:</label>
-        <select id="role" formControlName="role">
-          <option value="customer">User</option>
-          <option value="admin">Admin</option>
-        </select>
-        <div *ngIf="signupForm.get('role')?.invalid && signupForm.get('role')?.touched" class="error">
-          <small *ngIf="signupForm.get('role')?.errors?.['required']">Role is required.</small>
-        </div>
-      </div>
+     
 
     </div>
 

@@ -9,3 +9,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: rgb(255, 255, 255); /* Replace with your desired color */
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

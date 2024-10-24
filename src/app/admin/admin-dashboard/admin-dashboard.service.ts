@@ -18,7 +18,7 @@ export class AdminService {
     return this.http.get(`${this.baseUrl}/user`);
   }
 
-  // getAllBooks(): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}/book`);
-  // }
+   getAllBooks(): Observable<any> {
+     return this.http.get(`${this.baseUrl}/book`);
+   }
 }
