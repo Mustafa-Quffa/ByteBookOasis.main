@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FooterComponent } from 'app/footer/footer.component';
 import { HomeComponent } from 'app/home/home.component';
-
+import { AddBookComponent } from '../add-book/add-book.component';
 
 @Component({
   selector: 'app-admin-books',
@@ -30,107 +30,110 @@ import { HomeComponent } from 'app/home/home.component';
     MatFormFieldModule,
     MatSelectModule,
     MatDialogModule,
-    
   ],
   templateUrl: './admin-books.component.html',
   styleUrls: ['./admin-books.component.css'], // Corrected from styleUrl
 })
 export class AdminBooksComponent implements OnInit {
   books: Book[] = [];
-  book: Book = {
-    title: '',
-    author: '',
-    language: '',
-    price: 0,
-    publish_year: new Date().getFullYear(),
-    description: '',
-    pages: 0,
-    status: 'Available',
-    num_of_copies: 1,
-  };
-  isEditing: boolean = false;
-  search: string = '';
+  loading: boolean = true;
+  totalBooks: number = 0;
+  genresCount: number = 0; // Declare the genresCount property
+  limit: number = 10;
+  offset: number = 0;
+  page: number = 1;
+  hasNextPage: boolean = true; // track if there is a next page
 
   constructor(private booksService: BooksService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loadBooks();
+    this.loadAllBooks();
+    this.loadTotalBookCount();
+    this.loadGenresCount(); // Load genres count when component initializes
   }
 
-  // Load books (with search functionality)
-  loadBooks(): void {
-    this.booksService.getBooks(this.search).subscribe((data) => {
-      this.books = data;
+  loadAllBooks(): void {
+    this.loading = true;
+    const offset = (this.page - 1) * this.limit;
+
+    this.booksService.getBooks(this.limit, offset).subscribe({
+      next: (data) => {
+        this.books = data;
+        this.loading = false;
+        this.hasNextPage = this.books.length === this.limit;
+      },
+      error: (error) => {
+        console.error('Error fetching books', error);
+        this.loading = false;
+      }
     });
   }
 
-  // Search books by keyword
-  searchBooks(): void {
-    this.loadBooks();
+  loadTotalBookCount(): void {
+    this.booksService.getBooksCount().subscribe(count => {
+      this.totalBooks = count;
+    });
   }
 
-  // Handle form submission for add/update book
-  onSubmit(): void {
-    if (this.isEditing) {
-      if (this.book.id) { // Ensure `id` exists for editing
-        this.booksService.updateBook(this.book.id, this.book).subscribe(() => {
-          this.loadBooks();
-          this.resetForm();
-        });
-      }
-    } else {
-      this.booksService.addBook(this.book).subscribe(() => {
-        this.loadBooks();
-        this.resetForm();
-      });
+  loadGenresCount(): void {
+    this.booksService.getGenresCount().subscribe(count => {
+      this.genresCount = count; // Assign the count to genresCount property
+    });
+  }
+
+  loadMoreBooks(): void {
+    this.offset += this.limit; // increase the offset by limit
+    this.loadAllBooks();
+  }
+
+  nextPage(): void {
+    if (this.hasNextPage) { // Only go to next page if there are more books
+      this.page++;
+      this.loadAllBooks();
     }
   }
 
-  // Start editing a book
-  editBook(book: Book): void {
-    this.book = { ...book }; // Create a copy of the selected book to edit
-    this.isEditing = true;
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.loadAllBooks();
+    }
   }
 
-  // Delete a book by ID
-  deleteBook(id: number): void {
-    this.booksService.deleteBook(id).subscribe(() => {
-      this.loadBooks();
-    });
-  }
-
-  // Cancel the editing action
-  cancelEdit(): void {
-    this.resetForm();
-  }
-
-  // Reset the form after adding/editing or canceling
-  resetForm(): void {
-    this.book = {
-      title: '',
-      author: '',
-      language: '',
-      price: 0,
-      publish_year: new Date().getFullYear(),
-      description: '',
-      pages: 0,
-      status: 'Available',
-      num_of_copies: 1,
-    };
-    this.isEditing = false;
-  }
-
-  openModel = () =>{
-    const dialogConfig =new MatDialogConfig();
+  openAddBookModal(): void {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '1500px';
     dialogConfig.height = '900px';
     dialogConfig.backdropClass = 'popBackDropClass';
     dialogConfig.enterAnimationDuration = '500ms';
     dialogConfig.exitAnimationDuration = '500ms';
-    setTimeout(() => {
-    this.dialog.closeAll();
-      }, 5000);  // Close after 5 seconds
-    this.dialog.open(HomeComponent,dialogConfig)
+  
+    this.dialog.open(AddBookComponent, dialogConfig);
+  }
 
+  openUpdateBookModal(book: Book): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '1500px';
+    dialogConfig.height = '900px';
+    dialogConfig.backdropClass = 'popBackDropClass';
+    dialogConfig.enterAnimationDuration = '500ms';
+    dialogConfig.exitAnimationDuration = '500ms';
+    dialogConfig.data = book; // Pass the book data to the update dialog
+
+    this.dialog.open(HomeComponent, dialogConfig);
+  }
+
+  deleteBook(id: number): void {
+    if (confirm('Are you sure you want to delete this book?')) {
+      this.booksService.deleteBook(id).subscribe({
+        next: (response) => {
+          console.log('Book deleted successfully', response);
+          this.loadAllBooks(); // Refresh the book list after deletion
+        },
+        error: (error) => {
+          console.error('Error deleting book', error);
+        }
+      });
+    }
   }
 }

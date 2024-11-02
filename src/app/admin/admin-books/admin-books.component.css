@@ -24,6 +24,9 @@ body {
   margin-left: 270px; /* Match the Admin Dashboard */
   padding: 40px;
   width: calc(100% - 270px);
+  background-color: #ffffff; /* Ensure a consistent background for the main content */
+  border-radius: 8px; /* Add border radius for a softer look */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 header {
@@ -41,7 +44,6 @@ header h1 {
 .user-profile {
   font-size: 16px;
   margin-right: 155px;
-
 }
 
 .dashboard-overview {
@@ -112,23 +114,21 @@ header h1 {
   display: flex;
   gap: 10px;
   margin-bottom: 40px;
-  
 }
+
 .search-container button {
   background-color: rgb(61, 35, 35);
-  color: white; /* Ensure the text is visible */
-  padding: 12px 24px; /* Increase padding for a bigger button */
-  border: none; /* Remove any border */
-  border-radius: 4px; /* Less rounding for a rectangular shape */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  font-size: 16px; /* Adjust font size as needed */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  padding: 28px 24px; /* Vertical | Horizontal */
-
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .search-container button:hover {
-  background-color: rgb(81, 51, 51); /* Darker shade on hover */
+  background-color: rgb(81, 51, 51);
 }
 
 .full-width {
@@ -136,18 +136,21 @@ header h1 {
 }
 
 .book-list {
-  margin-left: 0; /* Align with the card style */
+  margin-left: 0;
 }
 
 .book-list table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px; /* Add some margin below the table */
 }
 
 .book-list th, .book-list td {
-  padding: 10px;
+  padding: 12px; /* Increase padding for better spacing */
   border: 1px solid #ddd;
+  text-align: left; /* Align text to the left for better readability */
 }
+
 .book-list h2 {
   color: rgb(61, 35, 35);
   font-size: larger;
@@ -159,4 +162,31 @@ header h1 {
 
 .book-list tbody tr:hover {
   background-color: #f9f9f9;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Space above the pagination */
+}
+
+.pagination button {
+  padding: 12px 20px;
+  background-color: rgb(61, 35, 35);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: rgb(81, 51, 51);
+}
+
+.pagination button[disabled] {
+  background-color: #ccc; /* Change background for disabled button */
+  cursor: not-allowed; /* Change cursor for disabled button */
 }

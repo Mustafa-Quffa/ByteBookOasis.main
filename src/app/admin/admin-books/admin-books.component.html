@@ -1,84 +1,86 @@
 <div class="admin-books-container">
-  <app-custom-layout></app-custom-layout>
-  <div class="main-content">
-      <header>
-          <h1>Admin Books Management</h1>
-          <div class="user-profile">
-              <app-profile-dropdown></app-profile-dropdown>
-          </div>
-      </header>
+    <app-custom-layout></app-custom-layout>
+    <div class="main-content">
+        <header>
+            <h1>Admin Books Management</h1>
+            <div class="user-profile">
+                <app-profile-dropdown></app-profile-dropdown>
+            </div>
+        </header>
 
-      <!-- Book Stats Section -->
-      <section class="dashboard-overview book-stats">
-          <div class="card">
-              <h2>Total Books</h2>
-              <!-- <p>{{ totalBooks }}</p> -->
-          </div>
-          <div class="card">
-              <h2>Available Books</h2>
-              <!-- <p>{{ availableBooks }}</p> -->
-          </div>
-          <div class="card">
-              <h2>Borrowed Books</h2>
-              <!-- <p>{{ borrowedBooks }}</p> -->
-          </div>
-          <div class="card">
-              <h2>Genres</h2>
-              <!-- <p>{{ totalGenres }}</p> -->
-          </div>
-      </section>
+        <!-- Book Stats Section -->
+        <section class="dashboard-overview book-stats">
+            <div class="card">
+                <h2>Total Books</h2>
+                <p>{{ totalBooks }}</p>
+            </div>
+            <div class="card">
+                <h2>Borrowed Books</h2>
+                <!-- <p>{{ borrowedBooks || 0 }}</p>  -->
+            </div>
+            <div class="card">
+                <h2>Genres</h2>
+                <p>{{ genresCount }}</p>
+            </div>
+        </section>
 
-      <!-- Management Links -->
-      <section class="admin-actions management-links">
-          <h2>Quick Actions</h2>
-          <button mat-button (click) = "openModel()" >Click me</button>
+        <!-- Management Links -->
+        <section class="admin-actions management-links">
+            <h2>Quick Actions</h2>
+            <button mat-button (click)="openAddBookModal()">Add New Book</button>
             <button routerLink="/borrowed-books" mat-raised-button color="accent">View Borrowed Books</button>
-      </section>
+        </section>
 
-      <!-- Search Bar -->
-      <div class="search-container">
-          <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Search for books..." [(ngModel)]="search" />
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="searchBooks()">Search</button>
-      </div>
+        <!-- Search Bar -->
+        <!-- <div class="search-container">
+            <mat-form-field class="full-width">
+                <mat-label>Search for books...</mat-label>
+                <input matInput type="text" [(ngModel)]="search" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="searchBooks()">Search</button>
+        </div> -->
 
-      <!-- Book List Table -->
-      <section class="book-list">
-          <h2>Books</h2>
-          <table>
-              <thead>
-                  <tr>
-                      <th>Title</th>
-                      <th>Author</th>
-                      <th>Language</th>
-                      <th>Price</th>
-                      <th>Year</th>
-                      <th>Copies</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let book of books">
-                      <td>{{ book.title }}</td>
-                      <td>{{ book.author }}</td>
-                      <td>{{ book.language }}</td>
-                      <td>{{ book.price }}</td>
-                      <td>{{ book.publish_year }}</td>
-                      <td>{{ book.num_of_copies }}</td>
-                      <td>{{ book.status }}</td>
-                      <td>
-                          <button mat-icon-button color="accent" (click)="editBook(book)" matTooltip="Edit">
-                              <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-icon-button color="warn" (click)="deleteBook(book.id!)" matTooltip="Delete">
-                              <mat-icon>delete</mat-icon>
-                          </button>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </section>
-  </div>
+        <!-- Book List Table -->
+        <section class="book-list">
+            <h2>Books</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Language</th>
+                        <th>Price</th>
+                        <th>Year</th>
+                        <th>Copies</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="loading">Loading books...</td>
+                    </tr>
+                    <tr *ngFor="let book of books">
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.language }}</td>
+                        <td>{{ book.price | currency }}</td> <!-- Format as currency -->
+                        <td>{{ book.publish_year }}</td>
+                        <td>{{ book.num_of_copies }}</td>
+                        <td>{{ book.status }}</td>
+                        <td>
+                            <button mat-button (click)="openUpdateBookModal(book)">Edit</button>
+                            <button mat-button (click)="deleteBook(book.id || 0)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button mat-button (click)="prevPage()" [disabled]="page === 1">Previous</button>
+            <button mat-button (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,116 @@
+.add-book-form {
+  max-width: 80%; /* Limits the form width for better readability */
+  margin: 20px auto; /* Centers the form */
+  padding: 30px; /* Adds more padding */
+  background-color: #ffffff; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two-column layout */
+  gap: 20px;
+}
+
+.add-book-form h2 {
+  grid-column: span 2; /* Spans the full width */
+  font-size: 24px; /* Larger font size */
+  color: rgb(61, 35, 35); /* Custom color */
+  font-weight: bold;
+  margin-bottom: 20px; /* Space below the heading */
+  text-align: center; /* Center align the title */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600; /* Semi-bold for improved readability */
+  color: #333; /* Darker label color */
+  margin-bottom: 8px; /* Adds a bit more space below label */
+}
+
+input,
+select,
+textarea,
+.mat-form-field {
+  padding: 10px; /* Padding for inputs */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s; /* Smooth transition on focus */
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.mat-form-field:focus-within {
+  border-color: #007bff; /* Highlight border on focus */
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  grid-column: span 2; /* Button spans full width */
+  padding: 12px 0;
+  background-color: rgb(61, 35, 35);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02); /* Slight scaling on hover */
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d9534f; /* Error text color */
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-message,
+.error-message {
+  grid-column: span 2;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.success-message {
+  color: #28a745;
+}
+
+.error-message {
+  color: #d9534f;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .add-book-form {
+    grid-template-columns: 1fr; /* Stacks fields vertically */
+  }
+
+  button {
+    padding: 10px;
+  }
+}
+
+/* Additional styling for mat-form-field */
+.mat-form-field {
+  grid-column: span 2; /* Span full width */
+  margin-bottom: 10px; /* Space below the field */
+}

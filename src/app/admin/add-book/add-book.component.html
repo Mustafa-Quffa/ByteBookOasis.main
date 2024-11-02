@@ -1,1 +1,106 @@
-<p>add-book works!</p>
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="add-book-form">
+  <h2>Add New Book</h2>
+
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" formControlName="title" required />
+    <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched" class="error">
+      Title is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author:</label>
+    <input id="author" formControlName="author" required />
+    <div *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched" class="error">
+      Author is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="language">Language:</label>
+    <input id="language" formControlName="language" required />
+    <div *ngIf="bookForm.get('language')?.invalid && bookForm.get('language')?.touched" class="error">
+      Language is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" id="price" formControlName="price" step="0.01" min="0" required />
+    <div *ngIf="bookForm.get('price')?.invalid && bookForm.get('price')?.touched" class="error">
+      Enter a valid price.
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <label for="publish_year">Publish Year:</label>
+    <input type="number" id="publish_year" formControlName="publish_year" required />
+    <div *ngIf="bookForm.get('publish_year')?.invalid && bookForm.get('publish_year')?.touched" class="error">
+      Publish year is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description" required></textarea>
+    <div *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched" class="error">
+      Description is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="pages">Pages:</label>
+    <input type="number" id="pages" formControlName="pages" required />
+    <div *ngIf="bookForm.get('pages')?.invalid && bookForm.get('pages')?.touched" class="error">
+      Enter a valid number of pages.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image URL:</label>
+    <input type="url" id="image" formControlName="image" />
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status:</label>
+    <select id="status" formControlName="status" required>
+      <option value="Available">Available</option>
+      <option value="Unavailable">Unavailable</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="num_of_copies">Number of Copies:</label>
+    <input
+      type="number"
+      id="num_of_copies"
+      formControlName="num_of_copies"
+      min="0"
+      required
+    />
+    <div *ngIf="bookForm.get('num_of_copies')?.invalid && bookForm.get('num_of_copies')?.touched" class="error">
+      Enter a valid number of copies.
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Genres</mat-label>
+      <mat-select formControlName="genre_ids" multiple>
+        <mat-option *ngFor="let genre of genres" [value]="genre.id">
+          {{ genre.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="bookForm.get('genre_ids')?.invalid && bookForm.get('genre_ids')?.touched" class="error">
+      Please select at least one genre.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="bookForm.invalid">Add Book</button>
+
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</form>

@@ -7,27 +7,36 @@ import { Book } from './book.model';
   providedIn: 'root'
 })
 export class BooksService {
-  private apiUrl = 'http://localhost:3000/books'; // Replace with your actual API
+  private totalBooks = 'http://localhost:3000/book/total-books'; 
+  private Genres = 'http://localhost:3000/genres/total-genres'; 
+  private AllBooks = 'http://localhost:3000/book/books';
+  private apiUrl = 'http://localhost:3000/book'; 
+
+
+
 
   constructor(private http: HttpClient) {}
-
-  // Fetch all books, optionally with a search term
-  getBooks(search: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}?search=${search}`);
+  getBooksCount(): Observable<number> {
+    return this.http.get<number>(`${this.totalBooks}`);
+  }
+  getGenresCount(): Observable<number> {
+    return this.http.get<any>(`${this.Genres}`);
   }
 
-  // Add a new book
-  addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(this.apiUrl, book);
+  getBooks(limit?: number, offset?: number): Observable<Book[]> {
+    let url = `${this.AllBooks}`;
+    if (limit !== undefined && offset !== undefined) {
+      url += `?limit=${limit}&offset=${offset}`;
+    }
+    return this.http.get<Book[]>(url);
   }
 
-  // Update a book by ID
-  updateBook(id: number, book: Book): Observable<Book> {
-    return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
+  updateBook(id: number, bookData: Book): Observable<Book> {
+    return this.http.put<Book>(`${this.apiUrl}/${id}`, bookData);
   }
 
-  // Delete a book by ID
-  deleteBook(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Delete a book
+  deleteBook(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/${id}`);
   }
 }
