@@ -113,7 +113,7 @@ export class AdminBooksComponent implements OnInit {
 
   openUpdateBookModal(book: Book): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '1500px';
+    dialogConfig.width = '2900px';
     dialogConfig.height = '900px';
     dialogConfig.backdropClass = 'popBackDropClass';
     dialogConfig.enterAnimationDuration = '500ms';

@@ -7,4 +7,6 @@
 <div class="">
     <router-outlet></router-outlet>
 </div>
-<app-footer *ngIf="showFooter",*ngIf="showNavbarAndFooter"></app-footer>
+<div>
+    <app-footer *ngIf="showFooter && showNavbarAndFooter"></app-footer>
+</div>

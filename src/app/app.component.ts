@@ -20,6 +20,7 @@ export class AppComponent {
   showFooter: boolean = true;
   showNavbarAndFooter = true; // Variable to control visibility
 
+  
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -30,9 +31,9 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Update the visibility based on the route
-        this.showNavbarAndFooter = !event.url.startsWith('/admin'); // Change '/admin' to your actual admin route
+        this.showNavbarAndFooter = !event.url.startsWith('/admin'); // Adjust '/admin' to your actual admin route
       }
-    });
+    });    
   }
 
 }

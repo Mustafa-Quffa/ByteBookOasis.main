@@ -9,7 +9,7 @@ import { Book } from './book.model';
 export class BooksService {
   private totalBooks = 'http://localhost:3000/book/total-books'; 
   private Genres = 'http://localhost:3000/genres/total-genres'; 
-  private AllBooks = 'http://localhost:3000/book/books';
+  private AllBooks = 'http://localhost:3000/book/all';
   private apiUrl = 'http://localhost:3000/book'; 
 
 

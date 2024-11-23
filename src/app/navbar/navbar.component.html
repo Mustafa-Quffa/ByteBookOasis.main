@@ -9,14 +9,12 @@
       </span>
     </a>  
   </div>
-  <div class="menu-toggle" (click)="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
   <ul class="nav-links" [ngClass]="{'nav-active': menuActive}">
     <li><a [routerLink]="['/about us']">About Us</a></li>
     <li><a href="#" (click)="scrollToBottom(); $event.preventDefault()">Contact Us</a></li>
+    <li><a [routerLink]="['/Browse']">Browse</a></li>
+    <li><a [routerLink]="['/My Reading']">My Reading</a></li>
+
   </ul>
   <!-- Display login section only if user is not authenticated -->
   <ng-container *ngIf="!isAuthenticated">

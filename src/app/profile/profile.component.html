@@ -1,9 +1,11 @@
 
     <main>
-        <section id="profile-picture">
-            <img src="../../assets/logo.png" alt="Profile Picture">
-            <input type="file" id="upload-profile" accept="image/*">
-        </section>
+        <div class="profile-picture-section">
+            <img [src]="profileImageUrl" alt="Profile Picture" class="profile-picture">
+            <input type="file" (change)="onFileSelected($event)">
+            <button (click)="uploadProfileImage()" [disabled]="!selectedFile">Change Profile Picture</button>
+        </div>
+        
         <section id="user-details">
             <h2>User Details</h2>
             <p><strong>Full Name:</strong> John Doe</p>
@@ -11,15 +13,6 @@
             <!-- <p><strong>Email Address:</strong> johndoe@example.com</p> -->
             <p><strong>Membership Status:</strong> Premium</p>
             <p><strong>Member Since:</strong> January 2020</p>
-        </section>
-        <section id="account-settings">
-            <h2>Account Settings</h2>
-            <div class="button-group">
-                <button>Edit Profile</button>
-                <button>Change Password</button>
-                <button>Notification Preferences</button>
-                <button>Privacy Settings</button>
-            </div>
         </section>
         <section id="current-borrowings">
             <h2>Current Borrowings</h2>
@@ -49,13 +42,12 @@
             <p><strong>Pages Read:</strong> 500</p>
             <p><strong>Average Reading Time:</strong> 10 hours</p>
         </section>
-        <section id="recommendations">
+        <!-- <section id="recommendations">
             <h2>Recommendations</h2>
             <ul>
                 <li><strong>Book Title 5:</strong> Recommended based on your reading history</li>
-                <!-- More recommendations here -->
             </ul>
-        </section>
+        </section> -->
         <section id="membership-details">
             <h2>Membership Details</h2>
             <p><strong>Subscription Plan:</strong> Premium</p>

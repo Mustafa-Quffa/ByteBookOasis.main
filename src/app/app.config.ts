@@ -5,6 +5,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 export const appConfig = {
   providers: [
-    provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi())
   ]
 };

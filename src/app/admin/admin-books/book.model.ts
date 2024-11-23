@@ -6,7 +6,11 @@ export interface Book {
   price: number;
   publish_year: number;
   description: string;
+  rating: number;
   pages: number;
   status: string;  // Available, Borrowed, etc.
   num_of_copies: number;
+  image: string; // Add this field for the image URL
+
+  
 }

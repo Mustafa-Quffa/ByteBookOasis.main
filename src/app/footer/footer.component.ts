@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
   faWhatsapp = faWhatsapp;
   faPhone = faPhone;
   faEnvelope = faEnvelope;
-  showFooter = false;
+  showFooter = true;
   private hiddenRoutes = ['/login', '/signup'];
 
   constructor(private router: Router) {}
@@ -40,7 +40,7 @@ export class FooterComponent implements OnInit {
   }
 
   checkScroll(): void {
-    const scrollTop = window.scrollY || window.pageYOffset;
+    const scrollTop = window.scrollY;
     const clientHeight = document.documentElement.clientHeight;
     const scrollHeight = document.documentElement.scrollHeight;
 

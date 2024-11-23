@@ -1,0 +1,106 @@
+<!-- Navigation Bar -->
+<div class="navbar">
+  <ul class="nav-links">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/browse/popular">Popular</a></li>
+    <li><a routerLink="/browse/recommended">Recommended</a></li>
+    <li><a routerLink="/browse/new-releases">New Releases</a></li>
+    <li><a routerLink="/browse/genres">Genres</a></li>
+  </ul>
+</div>
+
+<!-- Search Bar -->
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Search for books by title or author"
+    (input)="searchBooks()"
+  />
+</div>
+
+<!-- Browse Section -->
+<div class="browse-section">
+  <!-- Search Results -->
+  <div class="category" *ngIf="searchResults?.length">
+    <h2>Search Results</h2>
+    <div class="book-row">
+      <div class="book-item" *ngFor="let book of searchResults">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="book-info">
+          <h3>{{ book.title }}</h3>
+          <p>Author: {{ book.author }}</p>
+          <p>Rating: ★{{ book.rating }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Books -->
+  <div class="category" *ngIf="popularBooks?.length">
+    <h2>Popular Books</h2>
+    <div class="book-row">
+      <div class="book-item" *ngFor="let book of popularBooks">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="book-info">
+          <h3>{{ book.title }}</h3>
+          <p>Author: {{ book.author }}</p>
+          <p>Rating: ★{{ book.rating }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Recommended Books -->
+<div class="category" *ngIf="recommendedBooks?.length">
+  <h2>Recommended for You</h2>
+  <div class="book-row">
+    <div class="book-item" *ngFor="let book of recommendedBooks">
+      <img [src]="book.image" [alt]="book.title" />
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p>Author: {{ book.author }}</p>
+        <p>Rating: ★{{ book.rating }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="category" *ngFor="let genre of genres">
+  <div class="category">
+    <h2>{{ genre }}</h2>
+    <div class="book-row">
+      <!-- Safely check if books exist for this genre -->
+      <div *ngIf="(booksByGenre[genre] ?? []).length > 0; else noBooks">
+        <div class="book-item" *ngFor="let book of booksByGenre[genre]">
+          <img [src]="book.image" alt="{{ book.title }}" />
+          <div class="book-info">
+            <p>{{ book.title }}</p>
+            <p>{{ book.author }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Fallback message if no books are found for this genre -->
+      <ng-template #noBooks>
+        <p>No books available in this genre.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+  
+  <!-- Pagination Controls -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button
+      *ngFor="let page of pageNumbers()"
+      [ngClass]="{ 'active': page === currentPage }"
+      (click)="onPageChange(page)"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" *ngIf="showBackToTop" (click)="scrollToTop()">
+    ↑
+  </button>
+</div>
