@@ -4,15 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  isAuthenticated: boolean = false;
+  private isAuthenticated: boolean = false; // Make this private or public based on your use case
 
   constructor() {}
 
   checkLogIn(): boolean {
     const token = localStorage.getItem('token');
-    this.isAuthenticated = !!token;
+    if (token) {
+      this.isAuthenticated = true;  // You might also want to verify the token's validity here
+    } else {
+      this.isAuthenticated = false;
+    }
+    console.log('Check login: ', this.isAuthenticated);
     return this.isAuthenticated;
   }
+  
 
   logout(): void {
     localStorage.removeItem('token');
@@ -21,12 +27,15 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    // Retrieve user data from localStorage or similar
     const user = localStorage.getItem('loggedInUser');
-    return user ? JSON.parse(user) : null; // Parse and return user or null if no user
+    if (user) {
+      return JSON.parse(user);  // Return user data if it exists
+    }
+    return null;  // Return null if no user data exists
   }
+  
+  
 
-  // Example method for storing user info (like after login)
   storeUser(user: any): void {
     localStorage.setItem('loggedInUser', JSON.stringify(user));
   }

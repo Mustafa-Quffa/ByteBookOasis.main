@@ -1,0 +1,12 @@
+<div class="book-detail">
+    <h2>{{ book.title }}</h2>
+    <img [src]="book.image" [alt]="book.title" />
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Genre:</strong> {{ book.genre }}</p>
+    <p><strong>Rating:</strong> ★{{ book.rating }}</p>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Pages:</strong> {{ book.pages }}</p>
+    <p><strong>Price:</strong> ${{ book.price }}</p>
+    <button mat-button (click)="close()">Close</button>
+  </div>
+  

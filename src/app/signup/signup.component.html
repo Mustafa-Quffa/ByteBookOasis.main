@@ -3,7 +3,6 @@
   <div *ngIf="successMessage" class="alert alert-success">
     {{ successMessage }}
   </div>
-
   <!-- Display error message -->
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
@@ -84,10 +83,7 @@
           <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
           <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
         </div>
-      </div>
-
-      <!-- Role -->
-     
+      </div>     
 
     </div>
 

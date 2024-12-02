@@ -1,18 +1,48 @@
-<!-- Only show the profile button if the user is authenticated -->
-<button *ngIf="isAuthenticated" id="dropdownUserAvatarButton" class="profile-btn" (click)="toggleDropdown()">
-  <img class="w-8 h-8 rounded-full" src="../../assets/logo.png" alt="User Profile">
+<!-- Profile Button -->
+<button 
+  *ngIf="isAuthenticated" 
+  id="dropdownUserAvatarButton" 
+  class="profile-btn" 
+  (click)="toggleDropdown($event)">
+  <img class="w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" 
+       src="../../assets/images/logo.png" 
+       alt="User Profile">
 </button>
 
-<!-- Use ngClass to toggle dropdown visibility based on dropdownOpen value -->
-<div id="dropdownAvatar" class="dropdown-content" [ngClass]="{'show': dropdownOpen}">
+<!-- Dropdown Content -->
+<div 
+  id="dropdownAvatar" 
+  class="dropdown-content" 
+  [ngClass]="{'show': dropdownOpen}">
+  
+  <!-- Profile Info -->
   <div class="profile-info">
-    <div>{{ user.name }}</div> <!-- Display user name -->
-    <div>{{ user.email }}</div> <!-- Display user email -->
+    <!-- User Avatar -->
+    <img 
+      class="w-16 h-16 rounded-full mx-auto border-4 border-primary shadow-lg" 
+      src="../../assets/images/logo.png" 
+      alt="User Avatar">
+    
+    <div class="user-details mt-3 text-center">
+      <h4 class="text-lg font-semibold text-gray-800">{{ user.first_name }} {{ user.last_name }}</h4>
+      <p class="text-sm text-gray-500">{{ user.user_name }}</p>
+      <p class="text-sm text-gray-500">{{ user.email }}</p>
+    </div>
   </div>
-  <ul>
-    <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
-    <li><a [routerLink]="['/settings']">Settings</a></li>
-    <li><a [routerLink]="['/profile']">Edit Profile</a></li>
-    <li><a (click)="logout()">Sign out</a></li>
+  
+  <!-- Dropdown Items -->
+  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+    <li>
+      <a [routerLink]="['/profile']" class="dropdown-item flex items-center space-x-2">
+        <fa-icon [icon]="faUserEdit"></fa-icon>
+        <span>Edit Profile</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="logout()" class="dropdown-item flex items-center space-x-2" [ngClass]="{'no-hover': true}">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        <span>logout</span>
+      </a>
+    </li>
   </ul>
 </div>

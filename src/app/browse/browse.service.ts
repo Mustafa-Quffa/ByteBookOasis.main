@@ -11,13 +11,26 @@ export class BrowseService {
   private apiUrl = 'http://localhost:3000/book'; // Replace with your backend URL
   private baseUrl = 'http://localhost:3000/upload';
   private publicPath = 'http://localhost:3000'; // Base URL for serving public files
-  private ListOfGenres = 'http://localhost:3000/genres'; // Adjust the URL as needed
   private booksByGenres = 'http://localhost:3000/book';
+  private AssignBookToUser = 'http://localhost:3000/user-books';
 
 
 
   constructor(private http: HttpClient) {}
 
+
+  unassignBookFromUser(bookId: number, userId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/unassign`, {
+      body: { userId, bookId }, // Send userId and bookId in the request body
+    });
+  }
+  
+
+  assignBookToUser(bookId: number, userId: number): Observable<any> {
+    return this.http.post(`${this.AssignBookToUser}/assign`, { bookId, userId });
+  }
+
+  
   getBooksGroupedByGenres(): Observable<{ [genre: string]: Book[] }> {
     return this.http.get<{ [genre: string]: Book[] }>(`${this.booksByGenres}/grouped-by-genre`).pipe(
       map(response => {

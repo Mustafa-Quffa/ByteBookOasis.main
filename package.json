@@ -30,6 +30,7 @@
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.5",
+    "mdb-angular-ui-kit": "^7.1.0",
     "ng2-charts": "^4.1.1",
     "postcss": "^8.4.41",
     "rxjs": "~7.8.0",

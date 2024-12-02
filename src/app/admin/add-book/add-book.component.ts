@@ -39,6 +39,7 @@ export class AddBookComponent implements OnInit {
       status: ['', Validators.required],
       num_of_copies: ['', [Validators.required, Validators.min(1)]],
       genre_ids: [[]],
+      pdfUrl: ['', Validators.required]  // No pattern validation since it's a file input
     });
 
     this.fetchGenres();

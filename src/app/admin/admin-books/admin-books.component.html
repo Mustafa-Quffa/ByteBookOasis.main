@@ -15,10 +15,6 @@
                 <p>{{ totalBooks }}</p>
             </div>
             <div class="card">
-                <h2>Borrowed Books</h2>
-                <!-- <p>{{ borrowedBooks || 0 }}</p>  -->
-            </div>
-            <div class="card">
                 <h2>Genres</h2>
                 <p>{{ genresCount }}</p>
             </div>
@@ -28,7 +24,6 @@
         <section class="admin-actions management-links">
             <h2>Quick Actions</h2>
             <button mat-button (click)="openAddBookModal()">Add New Book</button>
-            <button routerLink="/borrowed-books" mat-raised-button color="accent">View Borrowed Books</button>
         </section>
 
         <!-- Book List Table -->
@@ -60,9 +55,9 @@
                         <td>{{ book.num_of_copies }}</td>
                         <td>{{ book.status }}</td>
                         <td>
-                            <button mat-icon-button (click)="openUpdateBookModal(book)">
+                            <!-- <button mat-icon-button (click)="(book)">
                                 <mat-icon>edit</mat-icon>
-                            </button>
+                            </button> -->
                             <button mat-icon-button (click)="deleteBook(book.id || 0)">
                                 <mat-icon>delete</mat-icon>
                             </button>

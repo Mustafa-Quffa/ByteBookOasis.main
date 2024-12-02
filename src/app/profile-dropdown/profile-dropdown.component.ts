@@ -1,63 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@services/auth.service';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faUserEdit, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-dropdown',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule, FontAwesomeModule],
   templateUrl: './profile-dropdown.component.html',
   styleUrl: './profile-dropdown.component.css'
 })
 export class ProfileDropdownComponent {
+
+  faUserEdit = faUserEdit;
+  faSignOutAlt = faSignOutAlt;
   isAuthenticated: boolean = false;
   dropdownOpen = false;
   user = {
-    name: '',
-    email: ''
+    user_name: '',
+    email: '',
+    first_name: '',
+    last_name: '',
   };
 
-
-  constructor(private authService:AuthService,private router: Router) {
-    this.isAuthenticated = this.authService.checkLogIn();
+  constructor(private authService: AuthService, private router: Router) {
+    this.checkLogIn();  // Check login status when the component is initialized
   }
-
-  
 
   ngOnInit(): void {
-    // Check if the user is authenticated (e.g., check if there's a token in localStorage)
-    this.checkLogIn();
+    // No need to call checkLogIn here, as it's already called in the constructor
   }
 
-  toggleDropdown() {
+  toggleDropdown(event: Event) {
+    // Prevent the click from propagating to the document
+    event.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeDropdown(event: Event) {
+    const clickedInside = document.getElementById('dropdownUserAvatarButton')?.contains(event.target as Node) ||
+                          document.getElementById('dropdownAvatar')?.contains(event.target as Node);
+
+    if (!clickedInside) {
+      this.dropdownOpen = false;  // Close the dropdown if the click is outside
+    }
   }
 
   checkLogIn(): void {
     const token = localStorage.getItem('token');
     if (token) {
       this.isAuthenticated = true;
-      
-      // Fetch user data from localStorage (replace with actual data source if necessary)
+      // Fetch user data from localStorage (or use another method to get user details)
       const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-      this.user.name = loggedInUser.name || 'Default Name';
-      this.user.email = loggedInUser.email || 'default@example.com';
+
+      if (loggedInUser) {
+        this.user.first_name = loggedInUser.first_name;
+        this.user.last_name = loggedInUser.last_name;
+        this.user.user_name = loggedInUser.user_name;
+        this.user.email = loggedInUser.email;
+      } else {
+        this.isAuthenticated = false; // If user data is not found, logout
+      }
     } else {
-      this.isAuthenticated = false;
+      this.isAuthenticated = false;  // No token means the user is not authenticated
     }
   }
 
-
   logout(): void {
-     // Clear local storage or any other logout functionality
-     localStorage.removeItem('token');
-     localStorage.removeItem('loggedInUser');
-     window.location.reload(); // Forces a full page reload
-     this.isAuthenticated = false;
-     this.router.navigate(['/login']);
+    // Clear local storage and logout the user
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedInUser');
+    this.isAuthenticated = false; // Update auth status
+    window.location.reload();  // Forces a full page reload
+    this.router.navigate(['/login']);  // Redirect to login page
   }
 }

@@ -20,10 +20,7 @@ export class SignupService {
   // API call to sign up a user
   signup(userData: any): Observable<any> {
     return this.http.post<any>(this.signupUrl, userData)
-    
   }
-
-  // Handle HTTP errors
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
 

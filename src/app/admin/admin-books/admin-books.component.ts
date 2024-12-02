@@ -14,6 +14,11 @@ import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/d
 import { FooterComponent } from 'app/footer/footer.component';
 import { HomeComponent } from 'app/home/home.component';
 import { AddBookComponent } from '../add-book/add-book.component';
+import { trigger } from '@angular/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 @Component({
   selector: 'app-admin-books',
@@ -33,6 +38,11 @@ import { AddBookComponent } from '../add-book/add-book.component';
   ],
   templateUrl: './admin-books.component.html',
   styleUrls: ['./admin-books.component.css'], // Corrected from styleUrl
+  animations: [
+    trigger('transitionMessages', [
+      // your animations here
+    ])
+  ]
 })
 export class AdminBooksComponent implements OnInit {
   books: Book[] = [];
@@ -54,13 +64,12 @@ export class AdminBooksComponent implements OnInit {
 
   loadAllBooks(): void {
     this.loading = true;
-    const offset = (this.page - 1) * this.limit;
-
+    const offset = (this.page - 1) * this.limit;  // Calculate the offset based on the current page and limit
     this.booksService.getBooks(this.limit, offset).subscribe({
       next: (data) => {
         this.books = data;
         this.loading = false;
-        this.hasNextPage = this.books.length === this.limit;
+        this.hasNextPage = this.books.length === this.limit;  // Check if there are more pages
       },
       error: (error) => {
         console.error('Error fetching books', error);
@@ -68,6 +77,7 @@ export class AdminBooksComponent implements OnInit {
       }
     });
   }
+  
 
   loadTotalBookCount(): void {
     this.booksService.getBooksCount().subscribe(count => {
@@ -101,6 +111,7 @@ export class AdminBooksComponent implements OnInit {
   }
 
   openAddBookModal(): void {
+    console.log('Opening AddBook Modal');  // Debugging line
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '1500px';
     dialogConfig.height = '900px';
@@ -111,17 +122,6 @@ export class AdminBooksComponent implements OnInit {
     this.dialog.open(AddBookComponent, dialogConfig);
   }
 
-  openUpdateBookModal(book: Book): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '2900px';
-    dialogConfig.height = '900px';
-    dialogConfig.backdropClass = 'popBackDropClass';
-    dialogConfig.enterAnimationDuration = '500ms';
-    dialogConfig.exitAnimationDuration = '500ms';
-    dialogConfig.data = book; // Pass the book data to the update dialog
-
-    this.dialog.open(HomeComponent, dialogConfig);
-  }
 
   deleteBook(id: number): void {
     if (confirm('Are you sure you want to delete this book?')) {

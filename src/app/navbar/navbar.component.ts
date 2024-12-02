@@ -56,9 +56,6 @@ export class NavbarComponent implements OnInit {
   }
 
   scrollToBottom(): void {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth'
-    });
+    document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
   }
 }

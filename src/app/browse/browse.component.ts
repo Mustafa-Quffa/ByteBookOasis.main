@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowseService } from './browse.service';
 import { Book } from 'app/admin/admin-books/book.model';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { BookDetailComponent } from 'app/book-detail/book-detail.component';
+import { AuthService } from '@services/auth.service';
+
 
 @Component({
   selector: 'app-browse',
@@ -12,6 +16,7 @@ import { Book } from 'app/admin/admin-books/book.model';
   styleUrls: ['./browse.component.css'],
 })
 export class BrowseComponent implements OnInit {
+  isAuthenticated: boolean = false; // Local variable to store authentication status
   popularBooks: Book[] = [];
   recommendedBooks: Book[] = [];
   booksByGenre: { [genre: string]: Book[] } = {};
@@ -36,29 +41,35 @@ export class BrowseComponent implements OnInit {
     'Horror'
   ];
 
-  showBackToTop = false;
+  showModal: boolean = false;
+  isModalOpen = false;
+  selectedBook: any = null;
+  
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const yOffset = window.scrollY || document.documentElement.scrollTop;
-    this.showBackToTop = yOffset > 300; // Show the button when scrolled 300px down
-  }
-
-  scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-
-  constructor(private browseService: BrowseService) {}
+  constructor(private browseService: BrowseService, private dialog: MatDialog,
+    private authService: AuthService // Inject AuthService
+  ) {}
 
   ngOnInit(): void {
-    
+    this.isAuthenticated = this.authService.checkLogIn();
+    console.log('Is authenticated in BrowseComponent:', this.isAuthenticated);
     this.loadPopularBooks();
     this.loadRecommendedBooks();
     this.loadBooksByGenres();
   }
+
+  openModal(book: any) {
+    this.selectedBook = book;
+    this.isModalOpen = true;
+  }
+  
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedBook = null;
+  }
+  
+  
 
   loadPopularBooks(): void {
     this.browseService.getBooksByFilter('Popular', this.currentPage, this.pageSize).subscribe({
@@ -68,6 +79,17 @@ export class BrowseComponent implements OnInit {
       },
       error: () => (this.error = 'Failed to load popular books'),
     });
+  }
+  
+  startReading(book: Book): void {
+    // Logic to start reading the book (maybe navigate to a reader page or update the reading status)
+    console.log('Started Reading:', book);
+  }
+
+  
+  handleButtonClick() {
+    // Implement your action here (e.g., alert, or another action)
+    console.log('Button clicked, take action now!');
   }
 
   loadRecommendedBooks(): void {
@@ -88,9 +110,6 @@ export class BrowseComponent implements OnInit {
       error: () => (this.error = 'Failed to load books grouped by genre'),
     });
   }
-  
-  
-  
 
   searchBooks(): void {
     if (!this.searchQuery.trim()) {
@@ -105,6 +124,38 @@ export class BrowseComponent implements OnInit {
       error: () => (this.error = 'Failed to search books'),
     });
   }
+
+
+  assignBook(book: Book): void {
+    const currentUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    console.log('Current User from LocalStorage:', currentUser);  // Log the user info
+  
+    if (currentUser && currentUser.id) {
+      console.log('User is logged in');
+      const userId = currentUser.id;
+      console.log('User ID:', userId);
+  
+      if (book.id !== undefined && book.id !== null) {
+        this.browseService.assignBookToUser(book.id, userId).subscribe({
+          next: (response) => {
+            if (typeof response === 'string') {
+              // If the response is a message (i.e., the book is already assigned)
+              alert(response);  // Show the message to the user
+            } else {
+              console.log('Book assigned successfully:', response);
+              alert(`Book "${book.title}" assigned to your account.`);
+              // Optionally, refresh the page or update the UI
+              window.location.reload();  // Forces a full page reload
+            }
+          },
+          error: (err) => {
+            console.error('Failed to assign book:', err);
+            alert('Failed to assign book. Please try again.');
+          },
+        });
+        
+      }}}
+    
 
   onPageChange(page: number): void {
     this.currentPage = page;

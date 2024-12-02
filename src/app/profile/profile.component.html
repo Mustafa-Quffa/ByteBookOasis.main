@@ -1,67 +1,45 @@
-
-    <main>
-        <div class="profile-picture-section">
-            <img [src]="profileImageUrl" alt="Profile Picture" class="profile-picture">
-            <input type="file" (change)="onFileSelected($event)">
-            <button (click)="uploadProfileImage()" [disabled]="!selectedFile">Change Profile Picture</button>
+<div class="profile-page">
+    <!-- Profile Info Section -->
+    <div class="profile-card">
+      <div class="profile-header">
+        <img class="profile-image" src="assets/default-profile.jpg" alt="Profile Picture">
+        <div class="profile-details">
+          <h1 class="username">Jane Doe</h1>
+          <p class="email">janedoe.com</p>
+          <button class="edit-btn">Edit Profile</button>
         </div>
-        
-        <section id="user-details">
-            <h2>User Details</h2>
-            <p><strong>Full Name:</strong> John Doe</p>
-            <p><strong>Username:</strong> johndoe</p>
-            <!-- <p><strong>Email Address:</strong> johndoe@example.com</p> -->
-            <p><strong>Membership Status:</strong> Premium</p>
-            <p><strong>Member Since:</strong> January 2020</p>
-        </section>
-        <section id="current-borrowings">
-            <h2>Current Borrowings</h2>
-            <ul>
-                <li><strong>Title:</strong> Book Title 1 <br> <strong>Author:</strong> Author Name <br> <strong>Due Date:</strong> 2024-09-01 <br> <button>Renew</button> <button>Return</button></li>
-                <!-- More items here -->
-            </ul>
-        </section>
-        <section id="borrowing-history">
-            <h2>Borrowing History</h2>
-            <ul>
-                <li><strong>Title:</strong> Book Title 2 <br> <strong>Author:</strong> Author Name <br> <strong>Borrowed Date:</strong> 2024-06-01 <br> <strong>Returned Date:</strong> 2024-07-01 <br> <button>Rate & Review</button></li>
-                <!-- More items here -->
-            </ul>
-        </section>
-        <section id="wishlist">
-            <h2>Wishlist</h2>
-            <ul>
-                <li><strong>Book Title:</strong> Book Title 3 <br> <button>Add</button> <button>Remove</button></li>
-                <!-- More items here -->
-            </ul>
-        </section>
-        <section id="reading-progress">
-            <h2>Reading Progress</h2>
-            <p><strong>Current Reading:</strong> Book Title 4 <br> <progress value="40" max="100"></progress> 40%</p>
-            <p><strong>Total Books Read:</strong> 25</p>
-            <p><strong>Pages Read:</strong> 500</p>
-            <p><strong>Average Reading Time:</strong> 10 hours</p>
-        </section>
-        <!-- <section id="recommendations">
-            <h2>Recommendations</h2>
-            <ul>
-                <li><strong>Book Title 5:</strong> Recommended based on your reading history</li>
-            </ul>
-        </section> -->
-        <section id="membership-details">
-            <h2>Membership Details</h2>
-            <p><strong>Subscription Plan:</strong> Premium</p>
-            <p><strong>Payment History:</strong> View details</p>
-            <p><strong>Renewal Information:</strong> 2024-12-01</p>
-        </section>
-        <section id="favorite-authors-genres">
-            <h2>Favorite Authors/Genres</h2>
-            <p><strong>Followed Authors:</strong> Author Name 1, Author Name 2</p>
-            <p><strong>Preferred Genres:</strong> Fiction, Non-Fiction</p>
-        </section>
-        <section id="logout">
-            <h2>Logout</h2>
-            <button>Logout</button>
-        </section>
-    </main>
+      </div>
+    </div>
+  
+    <!-- Account Details -->
+    <div class="profile-card">
+      <h2 class="section-title">Account Details</h2>
+      <div class="details-row">
+        <span class="label">Username:</span>
+        <span class="value">JaneDoe123</span>
+      </div>
+      <div class="details-row">
+        <span class="label">Member Since:</span>
+        <span class="value">March 15, 2023</span>
+      </div>
+      <div class="details-row">
+        <span class="label">Last Login:</span>
+        <span class="value">October 10, 2024</span>
+      </div>
+    </div>
+  
+    <!-- Borrowed Books Section -->
+    <div class="profile-card">
+      <h2 class="section-title">Currently Borrowing</h2>
+      <ul class="book-list">
+        <li class="book-item">The Great Gatsby</li>
+        <li class="book-item">To Kill a Mockingbird</li>
+      </ul>
+    </div>
+  
+    <!-- Logout Section -->
+    <div class="profile-card logout-card">
+      <button class="logout-btn">Log Out</button>
+    </div>
+  </div>
   

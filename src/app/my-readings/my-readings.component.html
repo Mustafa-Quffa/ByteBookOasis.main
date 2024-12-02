@@ -1,0 +1,43 @@
+<div class="my-readings-container">
+  <h1>My Readings</h1>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Assigned Books List -->
+  <div class="books-grid" *ngIf="assignedBooks.length > 0; else noBooks">
+    <div class="book-card" *ngFor="let assignedBook of assignedBooks">
+      <!-- Check if bookDetails is available, otherwise use placeholder -->
+      <img 
+        [src]="assignedBook.bookDetails?.image || 'assets/default-book-image.jpg'" 
+        alt="{{ assignedBook.bookDetails?.title || 'Book Image' }}" 
+        class="book-image" 
+      />
+      <div class="book-details">
+        <h2 class="book-title">{{ assignedBook.bookDetails?.title || 'Unknown Title' }}</h2>
+        <p class="book-author">by {{ assignedBook.bookDetails?.author || 'Unknown Author' }}</p>
+        <p class="book-description">
+          {{ assignedBook.bookDetails?.description | slice: 0:100 }}...
+        </p>
+        <button 
+          class="unassign-button" 
+          (click)="unassignBook(assignedBook)">
+          Remove from My Readings
+        </button>
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="startReading()">
+          Start Reading
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Books Placeholder -->
+  <ng-template #noBooks>
+    <p class="no-books-message">You have no assigned books at the moment.</p>
+  </ng-template>
+</div>

@@ -1,14 +1,3 @@
-<!-- Navigation Bar -->
-<div class="navbar">
-  <ul class="nav-links">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/browse/popular">Popular</a></li>
-    <li><a routerLink="/browse/recommended">Recommended</a></li>
-    <li><a routerLink="/browse/new-releases">New Releases</a></li>
-    <li><a routerLink="/browse/genres">Genres</a></li>
-  </ul>
-</div>
-
 <!-- Search Bar -->
 <div class="search-bar">
   <input
@@ -19,13 +8,53 @@
   />
 </div>
 
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="close" (click)="closeModal()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <svg viewBox="0 0 36 36" class="circle">
+        <path
+          stroke-dasharray="100, 100"
+          d="M18 2.0845
+            a 15.9155 15.9155 0 0 1 0 31.831
+            a 15.9155 15.9155 0 0 1 0 -31.831"
+        />
+      </svg>
+    </div>
+    <h3 style="font-size: 2rem;">{{ selectedBook.title }}</h3>
+    <img [src]="selectedBook.image" [alt]="selectedBook.title" />
+    <div class="modal-body">
+      <p>Author: {{ selectedBook.author }}</p>
+      <p>Genres: {{ selectedBook.genre }}</p>
+      <p>Description: {{ selectedBook.description }}</p>
+    </div>
+    <div class="model-btn">
+      <button
+      type="button"
+      class="btn btn-primary"
+      mdbRipple
+      (click)="assignBook(selectedBook)"
+    >
+      Add To My Readings
+    </button>
+      <button type="button" class="btn btn-primary" mdbRipple>Start Reading</button>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Browse Section -->
 <div class="browse-section">
   <!-- Search Results -->
-  <div class="category" *ngIf="searchResults?.length">
+  <div class="section" *ngIf="searchResults?.length">
     <h2>Search Results</h2>
     <div class="book-row">
-      <div class="book-item" *ngFor="let book of searchResults">
+      <div class="book-item" *ngFor="let book of searchResults" (click)="openModal(book)">
         <img [src]="book.image" [alt]="book.title" />
         <div class="book-info">
           <h3>{{ book.title }}</h3>
@@ -37,10 +66,10 @@
   </div>
 
   <!-- Popular Books -->
-  <div class="category" *ngIf="popularBooks?.length">
+  <div class="section">
     <h2>Popular Books</h2>
     <div class="book-row">
-      <div class="book-item" *ngFor="let book of popularBooks">
+      <div class="book-item" *ngFor="let book of popularBooks" (click)="openModal(book)">
         <img [src]="book.image" [alt]="book.title" />
         <div class="book-info">
           <h3>{{ book.title }}</h3>
@@ -51,43 +80,38 @@
     </div>
   </div>
 
-<!-- Recommended Books -->
-<div class="category" *ngIf="recommendedBooks?.length">
-  <h2>Recommended for You</h2>
-  <div class="book-row">
-    <div class="book-item" *ngFor="let book of recommendedBooks">
-      <img [src]="book.image" [alt]="book.title" />
-      <div class="book-info">
-        <h3>{{ book.title }}</h3>
-        <p>Author: {{ book.author }}</p>
-        <p>Rating: ★{{ book.rating }}</p>
+  <!-- Recommended Books -->
+  <div class="section" *ngIf="recommendedBooks?.length">
+    <h2>Recommended for You</h2>
+    <div class="book-row">
+      <div class="book-item" *ngFor="let book of recommendedBooks" (click)="openModal(book)">
+        <img [src]="book.image" [alt]="book.title" />
+        <div class="book-info">
+          <h3>{{ book.title }}</h3>
+          <p>Author: {{ book.author }}</p>
+          <p>Rating: ★{{ book.rating }}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="category" *ngFor="let genre of genres">
-  <div class="category">
+  <!-- Genres -->
+  <div class="section" *ngFor="let genre of genres">
     <h2>{{ genre }}</h2>
-    <div class="book-row">
-      <!-- Safely check if books exist for this genre -->
-      <div *ngIf="(booksByGenre[genre] ?? []).length > 0; else noBooks">
-        <div class="book-item" *ngFor="let book of booksByGenre[genre]">
-          <img [src]="book.image" alt="{{ book.title }}" />
+    <div *ngIf="(booksByGenre[genre] ?? []).length > 0; else noBooks" class="book-row">
+        <div class="book-item" *ngFor="let book of booksByGenre[genre]" (click)="openModal(book)">
+          <img [src]="book.image" [alt]="book.title" />
           <div class="book-info">
             <p>{{ book.title }}</p>
             <p>{{ book.author }}</p>
           </div>
         </div>
-      </div>
-      <!-- Fallback message if no books are found for this genre -->
-      <ng-template #noBooks>
-        <p>No books available in this genre.</p>
-      </ng-template>
     </div>
+    <ng-template #noBooks>
+      <p>No books available in this genre.</p>
+    </ng-template>
   </div>
-</div>
-  
+
   <!-- Pagination Controls -->
   <div class="pagination" *ngIf="totalPages > 1">
     <button
@@ -98,9 +122,4 @@
       {{ page }}
     </button>
   </div>
-
-  <!-- Back to Top Button -->
-  <button class="back-to-top" *ngIf="showBackToTop" (click)="scrollToTop()">
-    ↑
-  </button>
 </div>

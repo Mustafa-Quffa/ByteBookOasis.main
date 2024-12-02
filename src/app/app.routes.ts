@@ -14,6 +14,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminBooksComponent } from './admin/admin-books/admin-books.component';
 import { AdminGuard } from './guards/admin.guard';
 import { BrowseComponent } from './browse/browse.component';
+import { MyReadingsComponent } from './my-readings/my-readings.component';
 
 
 
@@ -38,8 +39,9 @@ export const routes: Routes = [
   {path: 'profile',component:ProfileComponent},
   {path: 'reset-password', component:ResetPasswordComponent},
   { path: 'reset-password/:token', component: ResetPasswordComponent },
-  { path: 'Browse', component: BrowseComponent },
+  { path: 'browse', component: BrowseComponent },
   {path: 'forgot-password',component:ForgotPasswordComponent},
+  {path: 'my-readings', component:MyReadingsComponent},
   { path: '**', redirectTo: '' }
 ];
 
